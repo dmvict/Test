@@ -2,13 +2,20 @@
 name : Forward
 
 on :
-  workflow_run :
-    workflows : [ 'pushOne', 'pushTwo' ]
+  push :
     branches : [ alpha ]
-    types : [ completed ]
 
 jobs :
+
+  first :
+    uses : dmvict/Test/.github/workflows/PushOne.yml
+
+  second :
+    uses : dmvict/Test/.github/workflows/PushTwo.yml
+
   merge :
+    needs: [ first, second ]
+    if: success()
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2

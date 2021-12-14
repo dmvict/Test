@@ -1,5 +1,5 @@
 
-name : push
+name : pushOne
 
 on :
   push:

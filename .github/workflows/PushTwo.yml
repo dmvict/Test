@@ -1,9 +1,7 @@
 
 name : pushTwo
 
-on :
-  push:
-    branches : [ alpha ]
+on: [ workflow_call ]
 
 jobs :
 

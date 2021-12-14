@@ -4,6 +4,7 @@ name : Forward
 on :
   workflow_run :
     workflows : [ 'pushOne', 'pushTwo' ]
+    branches : [ alpha ]
     types : [ completed ]
 
 jobs :

@@ -1,9 +1,7 @@
 
 name : push2
 
-on :
-  push:
-    branches : [ alpha ]
+on : [ push ]
 
 jobs :
 

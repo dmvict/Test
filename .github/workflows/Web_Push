@@ -1,0 +1,13 @@
+
+name: Web_Push
+
+on : [ push ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    if: "startsWith( github.event.head_commit.message, '[build]' )"
+    uses: dmvict/Test/.github/workflows/Web_Common.yml@alpha
+

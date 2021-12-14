@@ -1,0 +1,16 @@
+
+name : Forward
+
+on :
+  workflow_run :
+    workflows : [ 'push', 'push2' ]
+    types : [ completed ]
+
+jobs :
+  merge :
+    runs-on : ubuntu-latest
+    steps :
+      - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-workflow-run-wait@v1
+      - run: echo success
+

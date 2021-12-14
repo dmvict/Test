@@ -1,0 +1,15 @@
+
+name : push
+
+on : [ push ]
+
+jobs :
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run : echo hello
+
+  call:
+    needs : test
+    uses: dmvict/Test/.github/workflows/Common.yml@master
+

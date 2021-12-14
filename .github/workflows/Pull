@@ -1,0 +1,10 @@
+
+name : pull
+
+on : [ pull_request ]
+
+jobs :
+
+  call:
+    uses: dmvict/Test/.github/workflows/Common.yml@master
+

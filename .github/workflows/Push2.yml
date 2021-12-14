@@ -1,0 +1,14 @@
+
+name : push2
+
+on :
+  push:
+    branches : [ alpha ]
+
+jobs :
+
+  post :
+    runs-on : ubuntu-latest
+    steps :
+      - run : exit 0
+

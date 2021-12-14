@@ -1,5 +1,5 @@
 
-name : Forward
+name : Merge
 
 on :
   push :
@@ -8,10 +8,10 @@ on :
 jobs :
 
   first :
-    uses : dmvict/Test/.github/workflows/PushOne.yml
+    uses : dmvict/Test/.github/workflows/PushOne.yml@alpha
 
   second :
-    uses : dmvict/Test/.github/workflows/PushTwo.yml
+    uses : dmvict/Test/.github/workflows/PushTwo.yml@alpha
 
   merge :
     needs: [ first, second ]

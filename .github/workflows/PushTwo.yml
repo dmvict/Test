@@ -1,12 +1,20 @@
 
 name : push2
 
-on : [ push ]
+on:
+  workflow_call:
+    inputs:
+      commit:
+        required: true
+        type: string
 
 jobs :
 
-  post :
+  build :
     runs-on : ubuntu-latest
     steps :
-      - run : exit 0
+      - run : echo two
+      - name: conditional
+        if: ${{ inputs.commit != 'false' }}
+        run: echo conditional
 

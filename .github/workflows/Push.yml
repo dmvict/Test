@@ -21,5 +21,5 @@ jobs :
           destination-github-username: 'dmvict'
           destination-repository-name: 'test-push'
           user-email: dm.vict.kr@gmail.com
-          target-branch: main
+          target-branch: master
 

@@ -10,61 +10,24 @@ jobs :
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - run : git config --global user.email "dm.vict.kr@gmail.com"
-      - run : git config --global user.name "dmvict"
-
-      - run : npm i -g wrepo@alpha
-
       - run : cargo build --release
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: target/release/test
 
-      # - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
-      - run : git clone https://github.com/dmvict/test-push.git .test-push
-      # - run : rm -rf .test-push/out
-      # - run : mkdir -p .test-push/out/linux
-      # - run : cp target/release/test .test-push/out/linux/test
-      # - run : git -C .test-push/ add .
-      # - run : git -C .test-push/ commit -m 'Automated, linux'
-      # - name: Push changes
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.PRIVATE_TOKEN }}
-      #     branch: master
-      #     directory: .test-push/
-
-      - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
-      - run : repo .agree dst:'./.test-push/!master' src:'./out' dstDirPath:'out' message:__sync__
-      - run : git -C .test-push push
-
-
-      # - uses: quizlet/commit-changes@v0.2.0
-      #   with:
-      #     token: ${{ secrets.PRIVATE_TOKEN }}
-      #     message: Automated commit, linux
-      #     glob-patterns: out/
-
-  # macos :
-  #   if : "!contains( github.event.head_commit.message, 'Automated' )"
-  #   runs-on : macos-latest
-  #   steps :
-  #     - uses: actions/checkout@v2
-  #     - run : git submodule init
-  #     - run : git submodule update
-  #     - run : cargo build --release
-  #     - run : mkdir -p test-push/out/macos
-  #     - run : cp target/release/test test-push/out/macos/test
-  #     - run : cd test-push
-  #     - run : git config --global user.email "dm.vict.kr@gmail.com"
-  #     - run : git config --global user.name "dmvict"
-  #     - run : echo 'new line' >> file2.txt
-  #     - run : git add .
-  #     - run : git commit -m 'Automated, macos'
-  #     - run : git push
-
-      # - uses: quizlet/commit-changes@v0.2.0
-      #   with:
-      #     token: ${{ secrets.PRIVATE_TOKEN }}
-      #     message: Automated commit, macos
-      #     glob-patterns: out/
+  macos :
+    if : "!contains( github.event.head_commit.message, 'Automated' )"
+    runs-on : macos-latest
+    steps :
+      - uses: actions/checkout@v2
+      - run : cargo build --release
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: target/release/test
 
   # last :
   #   needs: [ linux, macos ]

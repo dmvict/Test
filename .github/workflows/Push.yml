@@ -5,13 +5,38 @@ on: [ push ]
 
 jobs :
 
-  build :
+
+  linux :
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
       - run : cargo build --release
-      - run : mkdir out
-      - run : cp target/release/test out/test
+      - run : mkdir -p out/linux
+      - run : cp target/release/test out/linux/test
+      - uses: quizlet/commit-changes@v0.2.0
+        with:
+          token: ${{ secrets.PRIVATE_TOKEN }}
+          message: Automated commit, linux
+          glob-patterns: out/
+
+  macos :
+    runs-on : macos-latest
+    steps :
+      - uses: actions/checkout@v2
+      - run : cargo build --release
+      - run : mkdir -p out/macos
+      - run : cp target/release/test out/macos/test
+      - uses: quizlet/commit-changes@v0.2.0
+        with:
+          token: ${{ secrets.PRIVATE_TOKEN }}
+          message: Automated commit, macos
+          glob-patterns: out/
+
+  last :
+    needs: [ linux, macos ]
+    runs-on : ubuntu-latest
+    steps :
+      - uses: actions/checkout@v2
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:

@@ -7,6 +7,7 @@ jobs :
 
 
   linux :
+    if : "!contains( github.event.head_commit.message, 'Automated' )"
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
@@ -20,6 +21,7 @@ jobs :
           glob-patterns: out/
 
   macos :
+    if : "!contains( github.event.head_commit.message, 'Automated' )"
     runs-on : macos-latest
     steps :
       - uses: actions/checkout@v2

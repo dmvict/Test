@@ -1,3 +1,0 @@
-[submodule "test-push"]
-	path = test-push
-	url = https://github.com/dmvict/test-push.git

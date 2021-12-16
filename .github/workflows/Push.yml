@@ -1,0 +1,24 @@
+
+name : push
+
+on: [ push ]
+
+jobs :
+
+  build :
+    runs-on : ubuntu-latest
+    steps :
+      - run : cargo build --release
+      - run : mkdir out
+      - run : cp target/release/test out/test
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
+        with:
+          source-directory: 'out'
+          destination-github-username: 'dmvict'
+          destination-repository-name: 'test-push'
+          user-email: dm.vict.kr@gmail.com
+          target-branch: main
+

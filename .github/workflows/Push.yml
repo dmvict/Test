@@ -17,18 +17,22 @@ jobs :
       - run : npm i -g wrepo@alpha
 
       - run : cargo build --release
-      - run : mkdir -p out/linux
-      - run : cp target/release/test out/linux/test
-      - run : git add out/
-      - run : git commit -m 'Automated, linux'
-
-      - run : git clone https://github.com/dmvict/test-push.git ../test-push
 
       - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'
-      - run : ls ..
-      - run : ls
-      - run : repo .agree dst:'../test-push/!master' src:'../Test/out' dstDirPath:'out' message:__sync__
-      - run : git push
+      - run : git clone https://github.com/dmvict/test-push.git ../test-push
+      - run : rm -rf ../test-push/out
+      - run : mkdir -p ../test-push/out/linux
+      - run : cp target/release/test ../test-push/out/linux/test
+      - run : git -C ../test-push/ add .
+      - run : git -C ../test-push/ commit -m 'Automated, linux'
+      - run : git -C ../test-push/ push
+
+
+      # - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'
+      # - run : ls ..
+      # - run : ls
+      # - run : repo .agree dst:'../test-push/!master' src:'../Test/out' dstDirPath:'out' message:__sync__
+      # - run : git push
 
 
       # - uses: quizlet/commit-changes@v0.2.0

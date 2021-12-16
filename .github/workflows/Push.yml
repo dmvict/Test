@@ -18,14 +18,14 @@ jobs :
 
       - run : cargo build --release
 
-      # - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
+      - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
       - run : git clone https://github.com/dmvict/test-push.git ../test-push
       - run : rm -rf ../test-push/out
       - run : mkdir -p ../test-push/out/linux
       - run : cp target/release/test ../test-push/out/linux/test
       - run : git -C ../test-push/ add .
       - run : git -C ../test-push/ commit -m 'Automated, linux'
-      - run : git -C ../test-push/ remote set-url origin https://dmvict:$PRIVATE_TOKEN@github.com/dmvict/test-push.git
+      - run : git -C ../test-push/ remote set-url origin https://github.com/dmvict/test-push.git
       - run : git -C ../test-push/ push
 
 

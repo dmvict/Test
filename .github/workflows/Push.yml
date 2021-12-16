@@ -14,7 +14,7 @@ jobs :
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: artifact
+          name: artifact1
           path: target/release/test
 
   macos :
@@ -26,7 +26,7 @@ jobs :
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: artifact
+          name: artifact2
           path: target/release/test
 
   # last :

@@ -12,8 +12,9 @@ jobs :
     steps :
       - uses: actions/checkout@v2
       - run : cargo build --release
-      - run : mkdir -p out/linux
-      - run : cp target/release/test out/linux/test
+      - run : mkdir -p test-push/out/linux
+      - run : cp test-push/target/release/test test-push/out/linux/test
+      - run : cd test-push
       - uses: quizlet/commit-changes@v0.2.0
         with:
           token: ${{ secrets.PRIVATE_TOKEN }}
@@ -26,30 +27,31 @@ jobs :
     steps :
       - uses: actions/checkout@v2
       - run : cargo build --release
-      - run : mkdir -p out/macos
-      - run : cp target/release/test out/macos/test
+      - run : mkdir -p test-push/out/macos
+      - run : cp test-push/target/release/test test-push/out/macos/test
+      - run : cd test-push
       - uses: quizlet/commit-changes@v0.2.0
         with:
           token: ${{ secrets.PRIVATE_TOKEN }}
           message: Automated commit, macos
           glob-patterns: out/
 
-  last :
-    needs: [ linux, macos ]
-    runs-on : ubuntu-latest
-    steps :
-      - uses: actions/checkout@v2
-        with :
-          fetch-depth: 5
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
-        with:
-          source-directory: 'out'
-          target-directory: 'out'
-          destination-github-username: 'dmvict'
-          destination-repository-name: 'test-push'
-          user-email: dm.vict.kr@gmail.com
-          target-branch: master
+  # last :
+  #   needs: [ linux, macos ]
+  #   runs-on : ubuntu-latest
+  #   steps :
+  #     - uses: actions/checkout@v2
+  #       with :
+  #         fetch-depth: 5
+  #     - name: Pushes to another repository
+  #       uses: cpina/github-action-push-to-another-repository@main
+  #       env:
+  #         API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
+  #       with:
+  #         source-directory: 'out'
+  #         target-directory: 'out'
+  #         destination-github-username: 'dmvict'
+  #         destination-repository-name: 'test-push'
+  #         user-email: dm.vict.kr@gmail.com
+  #         target-branch: master
 

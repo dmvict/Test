@@ -14,8 +14,9 @@ jobs :
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: artifact1
+          name: linux
           path: target/release/test
+          retention-days: 1
 
   macos :
     if : "!contains( github.event.head_commit.message, 'Automated' )"
@@ -26,25 +27,32 @@ jobs :
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: artifact2
+          name: macos
           path: target/release/test
+          retention-days: 1
 
-  # last :
-  #   needs: [ linux, macos ]
-  #   runs-on : ubuntu-latest
-  #   steps :
-  #     - uses: actions/checkout@v2
-  #       with :
-  #         fetch-depth: 5
-  #     - name: Pushes to another repository
-  #       uses: cpina/github-action-push-to-another-repository@main
-  #       env:
-  #         API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
-  #       with:
-  #         source-directory: 'out'
-  #         target-directory: 'out'
-  #         destination-github-username: 'dmvict'
-  #         destination-repository-name: 'test-push'
-  #         user-email: dm.vict.kr@gmail.com
-  #         target-branch: master
+  last :
+    needs: [ linux, macos ]
+    runs-on : ubuntu-latest
+    steps :
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: linux
+          path: out/linux_release/test
+      - uses: actions/download-artifact@v2
+        with:
+          name: macos
+          path: out/macos_release/test
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
+        with:
+          source-directory: 'out'
+          target-directory: 'out'
+          destination-github-username: 'dmvict'
+          destination-repository-name: 'test-push'
+          user-email: dm.vict.kr@gmail.com
+          target-branch: master
 

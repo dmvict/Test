@@ -13,29 +13,27 @@ jobs :
       - run : git config --global user.email "dm.vict.kr@gmail.com"
       - run : git config --global user.name "dmvict"
 
-      # - run : npm i -g wrepo@alpha
+      - run : npm i -g wrepo@alpha
 
       - run : cargo build --release
 
       # - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
       - run : git clone https://github.com/dmvict/test-push.git .test-push
-      - run : rm -rf .test-push/out
-      - run : mkdir -p .test-push/out/linux
-      - run : cp target/release/test .test-push/out/linux/test
-      - run : git -C .test-push/ add .
-      - run : git -C .test-push/ commit -m 'Automated, linux'
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PRIVATE_TOKEN }}
-          branch: master
-          directory: .test-push/
+      # - run : rm -rf .test-push/out
+      # - run : mkdir -p .test-push/out/linux
+      # - run : cp target/release/test .test-push/out/linux/test
+      # - run : git -C .test-push/ add .
+      # - run : git -C .test-push/ commit -m 'Automated, linux'
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.PRIVATE_TOKEN }}
+      #     branch: master
+      #     directory: .test-push/
 
-      # - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'
-      # - run : ls ..
-      # - run : ls
-      # - run : repo .agree dst:'../test-push/!master' src:'../Test/out' dstDirPath:'out' message:__sync__
-      # - run : git push
+      - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
+      - run : repo .agree dst:'./.test-push/!master' src:'./out' dstDirPath:'out' message:__sync__
+      - run : git -C .test-push push
 
 
       # - uses: quizlet/commit-changes@v0.2.0

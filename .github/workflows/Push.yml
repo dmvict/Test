@@ -15,11 +15,15 @@ jobs :
       - run : mkdir -p test-push/out/linux
       - run : cp target/release/test test-push/out/linux/test
       - run : cd test-push
-      - uses: quizlet/commit-changes@v0.2.0
-        with:
-          token: ${{ secrets.PRIVATE_TOKEN }}
-          message: Automated commit, linux
-          glob-patterns: out/
+      - run : git add .
+      - run : git commit -m 'Automated, linux'
+      - run : git push
+
+      # - uses: quizlet/commit-changes@v0.2.0
+      #   with:
+      #     token: ${{ secrets.PRIVATE_TOKEN }}
+      #     message: Automated commit, linux
+      #     glob-patterns: out/
 
   macos :
     if : "!contains( github.event.head_commit.message, 'Automated' )"
@@ -30,11 +34,15 @@ jobs :
       - run : mkdir -p test-push/out/macos
       - run : cp target/release/test test-push/out/macos/test
       - run : cd test-push
-      - uses: quizlet/commit-changes@v0.2.0
-        with:
-          token: ${{ secrets.PRIVATE_TOKEN }}
-          message: Automated commit, macos
-          glob-patterns: out/
+      - run : git add .
+      - run : git commit -m 'Automated, macos'
+      - run : git push
+
+      # - uses: quizlet/commit-changes@v0.2.0
+      #   with:
+      #     token: ${{ secrets.PRIVATE_TOKEN }}
+      #     message: Automated commit, macos
+      #     glob-patterns: out/
 
   # last :
   #   needs: [ linux, macos ]

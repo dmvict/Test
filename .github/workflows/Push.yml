@@ -19,6 +19,8 @@ jobs :
       - run : cargo build --release
       - run : mkdir -p out/linux
       - run : cp target/release/test out/linux/test
+      - run : git add out/
+      - run : git commit -m 'Automated, linux'
 
       - run : cd ..
       - run : git clone https://github.com/dmvict/test-push.git

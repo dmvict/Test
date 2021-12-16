@@ -11,18 +11,23 @@ jobs :
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - run : git submodule init
-      - run : git submodule update
-      - run : cargo build --release
-      - run : mkdir -p test-push/out/linux
-      - run : cp target/release/test test-push/out/linux/test
-      - run : cd test-push
       - run : git config --global user.email "dm.vict.kr@gmail.com"
       - run : git config --global user.name "dmvict"
-      - run : echo 'new line' >> file.txt
-      - run : git add .
-      - run : git commit -m 'Automated, linux'
+
+      - run : npm i -g wrepo@alpha
+
+      - run : cargo build --release
+      - run : mkdir -p out/linux
+      - run : cp target/release/test out/linux/test
+
+      - run : cd ..
+      - run : git clone https://github.com/dmvict/test-push.git
+      - run : cd test-push
+
+      - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'
+      - run : repo .agree dst:./!master src:../repo!master srcDirPath:'out' dstDirPath:'out' message:__sync__
       - run : git push
+
 
       # - uses: quizlet/commit-changes@v0.2.0
       #   with:
@@ -30,23 +35,23 @@ jobs :
       #     message: Automated commit, linux
       #     glob-patterns: out/
 
-  macos :
-    if : "!contains( github.event.head_commit.message, 'Automated' )"
-    runs-on : macos-latest
-    steps :
-      - uses: actions/checkout@v2
-      - run : git submodule init
-      - run : git submodule update
-      - run : cargo build --release
-      - run : mkdir -p test-push/out/macos
-      - run : cp target/release/test test-push/out/macos/test
-      - run : cd test-push
-      - run : git config --global user.email "dm.vict.kr@gmail.com"
-      - run : git config --global user.name "dmvict"
-      - run : echo 'new line' >> file2.txt
-      - run : git add .
-      - run : git commit -m 'Automated, macos'
-      - run : git push
+  # macos :
+  #   if : "!contains( github.event.head_commit.message, 'Automated' )"
+  #   runs-on : macos-latest
+  #   steps :
+  #     - uses: actions/checkout@v2
+  #     - run : git submodule init
+  #     - run : git submodule update
+  #     - run : cargo build --release
+  #     - run : mkdir -p test-push/out/macos
+  #     - run : cp target/release/test test-push/out/macos/test
+  #     - run : cd test-push
+  #     - run : git config --global user.email "dm.vict.kr@gmail.com"
+  #     - run : git config --global user.name "dmvict"
+  #     - run : echo 'new line' >> file2.txt
+  #     - run : git add .
+  #     - run : git commit -m 'Automated, macos'
+  #     - run : git push
 
       # - uses: quizlet/commit-changes@v0.2.0
       #   with:

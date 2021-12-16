@@ -25,7 +25,8 @@ jobs :
       - run : cd test-push
 
       - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'
-      - run : repo .agree dst:./!master src:../repo!master srcDirPath:'out' dstDirPath:'out' message:__sync__
+      - run : ls ..
+      - run : repo .agree dst:./!master src:../Test!master srcDirPath:'out' dstDirPath:'out' message:__sync__
       - run : git push
 
 

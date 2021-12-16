@@ -8,6 +8,7 @@ jobs :
   build :
     runs-on : ubuntu-latest
     steps :
+      - uses: actions/checkout@v2
       - run : cargo build --release
       - run : mkdir out
       - run : cp target/release/test out/test

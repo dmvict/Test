@@ -11,6 +11,8 @@ jobs :
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
+      - run : git submodule init
+      - run : git submodule update
       - run : cargo build --release
       - run : mkdir -p test-push/out/linux
       - run : cp target/release/test test-push/out/linux/test
@@ -33,6 +35,8 @@ jobs :
     runs-on : macos-latest
     steps :
       - uses: actions/checkout@v2
+      - run : git submodule init
+      - run : git submodule update
       - run : cargo build --release
       - run : mkdir -p test-push/out/macos
       - run : cp target/release/test test-push/out/macos/test

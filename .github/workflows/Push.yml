@@ -17,6 +17,7 @@ jobs :
       - run : cd test-push
       - run : git config --global user.email "dm.vict.kr@gmail.com"
       - run : git config --global user.name "dmvict"
+      - run : echo 'new line' >> file.txt
       - run : git add .
       - run : git commit -m 'Automated, linux'
       - run : git push
@@ -38,6 +39,7 @@ jobs :
       - run : cd test-push
       - run : git config --global user.email "dm.vict.kr@gmail.com"
       - run : git config --global user.name "dmvict"
+      - run : echo 'new line' >> file2.txt
       - run : git add .
       - run : git commit -m 'Automated, macos'
       - run : git push

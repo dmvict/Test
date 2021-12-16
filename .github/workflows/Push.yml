@@ -39,11 +39,11 @@ jobs :
       - uses: actions/download-artifact@v2
         with:
           name: linux
-          path: out/linux_release/test
+          path: out/linux_release
       - uses: actions/download-artifact@v2
         with:
           name: macos
-          path: out/macos_release/test
+          path: out/macos_release
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:

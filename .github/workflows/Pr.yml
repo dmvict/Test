@@ -10,7 +10,7 @@ jobs :
     steps :
       - uses: actions/checkout@v2
       - name: Open PR
-        uses: gha-utilities/init-pull-request@v0.3.2
+        uses: gha-utilities/init-pull-request@v0.3.1
         with:
           verbose: true
           pull_request_token: ${{ secrets.PRIVATE_TOKEN }}

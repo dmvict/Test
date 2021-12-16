@@ -22,8 +22,8 @@ jobs :
       - run : git add out/
       - run : git commit -m 'Automated, linux'
 
-      - run : cd ..
-      - run : git clone https://github.com/dmvict/test-push.git
+      - run : cd ../../
+      - run : git clone https://github.com/dmvict/test-push.git test-push
       - run : cd test-push
 
       - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'

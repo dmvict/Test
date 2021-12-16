@@ -15,6 +15,8 @@ jobs :
       - run : mkdir -p test-push/out/linux
       - run : cp target/release/test test-push/out/linux/test
       - run : cd test-push
+      - run : git config --global user.email "dm.vict.kr@gmail.com"
+      - run : git config --global user.name "dmvict"
       - run : git add .
       - run : git commit -m 'Automated, linux'
       - run : git push
@@ -34,6 +36,8 @@ jobs :
       - run : mkdir -p test-push/out/macos
       - run : cp target/release/test test-push/out/macos/test
       - run : cd test-push
+      - run : git config --global user.email "dm.vict.kr@gmail.com"
+      - run : git config --global user.name "dmvict"
       - run : git add .
       - run : git commit -m 'Automated, macos'
       - run : git push

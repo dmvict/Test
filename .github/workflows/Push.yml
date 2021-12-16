@@ -6,18 +6,19 @@ on: [ push ]
 jobs :
 
   build :
-    runs-on : windows-latest
+    runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
       - run : cargo build --release
       - run : mkdir out
-      - run : copy target/release/test.exe out/test
+      - run : cp target/release/test out/test
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
         with:
           source-directory: 'out'
+          target-directory: 'out'
           destination-github-username: 'dmvict'
           destination-repository-name: 'test-push'
           user-email: dm.vict.kr@gmail.com

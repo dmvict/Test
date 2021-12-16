@@ -5,35 +5,26 @@ on: [ push ]
 
 jobs :
 
-  linux :
+  build :
     uses : dmvict/Test/.github/workflows/Linux.yml@master
 
-  macos :
-    if : "!contains( github.event.head_commit.message, 'Automated' )"
-    runs-on : macos-latest
-    steps :
-      - uses: actions/checkout@v2
-      - run : cargo build --release
-      - name: Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: macos
-          path: target/release/test
-          retention-days: 1
-
   last :
-    needs: [ linux, macos ]
+    needs: [ build ]
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: linux
+          name: ubuntu
           path: out/linux_release
       - uses: actions/download-artifact@v2
         with:
           name: macos
           path: out/macos_release
+      - uses: actions/download-artifact@v2
+        with:
+          name: windows
+          path: out/windows_release
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:

@@ -10,7 +10,7 @@ jobs :
     steps :
       - uses: actions/checkout@v2
       - name: Open Pr
-        uses: vsoch/pull-request-action@master
+        uses: vsoch/pull-request-action@1.0.18
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
           PULL_REQUEST_BRANCH: alpha

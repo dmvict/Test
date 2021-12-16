@@ -13,7 +13,7 @@ jobs :
       - uses: actions/checkout@v2
       - run : cargo build --release
       - run : mkdir -p test-push/out/linux
-      - run : cp test-push/target/release/test test-push/out/linux/test
+      - run : cp target/release/test test-push/out/linux/test
       - run : cd test-push
       - uses: quizlet/commit-changes@v0.2.0
         with:
@@ -28,7 +28,7 @@ jobs :
       - uses: actions/checkout@v2
       - run : cargo build --release
       - run : mkdir -p test-push/out/macos
-      - run : cp test-push/target/release/test test-push/out/macos/test
+      - run : cp target/release/test test-push/out/macos/test
       - run : cd test-push
       - uses: quizlet/commit-changes@v0.2.0
         with:

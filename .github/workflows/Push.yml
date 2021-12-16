@@ -18,7 +18,7 @@ jobs :
 
       - run : cargo build --release
 
-      - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=${{ secrets.PRIVATE_TOKEN }}"; }; f'
+      - run : git config credential.helper '!f(){ echo "username=dmvict" && echo "password=$PRIVATE_TOKEN"; }; f'
       - run : git clone https://github.com/dmvict/test-push.git ../test-push
       - run : rm -rf ../test-push/out
       - run : mkdir -p ../test-push/out/linux

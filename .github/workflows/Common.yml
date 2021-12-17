@@ -1,18 +1,24 @@
 
 name : linux
 
-on:
-  workflow_call:
-    inputs:
-      debug:
-        required: true
-        type: boolean
+on: push
 
 jobs :
 
   build :
-    runs-on: ubuntu-latest
+    if : "!contains( github.event.head_commit.message, 'Automated' )"
+    strategy :
+      fail-fast : false
+      matrix :
+        os : [ ubuntu, windows, macos ]
+    runs-on: ${{ matrix.os }}-latest
     steps :
-      - run : echo ${{ inputs.debug == true }}
-      - run : echo ${{ inputs.debug == false }}
+      - uses: actions/checkout@v2
+      - run : cargo build --release
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: target/release/test(|.exe|.dll)
+          retention-days: 1
 

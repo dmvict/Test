@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete workflow runs
-        uses: MajorScruffy/delete-workflow-runs
+        uses: MajorScruffy/delete-workflow-runs@v0.1.0
         with:
           repository:  obox-systems/rust_game_template
           older-than-seconds: 86400

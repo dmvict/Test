@@ -1,0 +1,22 @@
+
+name: Delete
+on:
+  workflow_dispatch:
+    inputs:
+      seconds:
+        older-than-seconds: 'Delete older than the number of seconds ( default is 90 days ).'
+        required: true
+        type: number
+        default: 7776000
+
+jobs:
+  del_runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete workflow runs
+        uses: MajorScruffy/delete-workflow-runs@v0.1.0
+        with:
+          repository: dmvict/Test
+          older-than-seconds: ${{ github.event.inputs.seconds }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}

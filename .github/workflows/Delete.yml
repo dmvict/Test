@@ -3,7 +3,7 @@ name: Delete
 on:
   workflow_dispatch:
     inputs:
-      days:
+      seconds:
         older-than-seconds: 'Delete older than the number of seconds ( default is 90 days ).'
         required: true
         type: number
@@ -16,7 +16,7 @@ jobs:
       - name: Delete workflow runs
         uses: MajorScruffy/delete-workflow-runs@v0.1.0
         with:
-          repository:  obox-systems/rust_game_template
-          older-than-seconds: 86400
+          repository: dmvict/Test
+          older-than-seconds: ${{ github.event.inputs.seconds }}
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}

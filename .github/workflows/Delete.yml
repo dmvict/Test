@@ -18,6 +18,6 @@ jobs:
         with:
           repository: dmvict/Test
           older-than-seconds: ${{ github.event.inputs.seconds }}
-          what-if: false
+          what-if: true
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}

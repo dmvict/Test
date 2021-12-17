@@ -10,3 +10,8 @@ jobs :
     with :
       debug : true
 
+  build2 :
+    uses : dmvict/Test/.github/workflows/Common.yml@master
+    with :
+      debug : false
+

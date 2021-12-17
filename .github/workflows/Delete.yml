@@ -6,6 +6,7 @@ on:
       days:
         description: 'Number of days.'
         required: true
+        type: number
         default: 90
 
 jobs:

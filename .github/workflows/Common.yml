@@ -21,4 +21,20 @@ jobs :
           name: ${{ matrix.os }}
           path: target/release/test?(.exe|.dll)
           retention-days: 1
+      - name: Upload
+        if: ${{ matrix.os != 'windows' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: target/release/test
+          retention-days: 1
+      - name: Upload
+        if: ${{ matrix.os == 'windows' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: |
+            target/release/test.exe
+            target/release/test.dll
+          retention-days: 1
 

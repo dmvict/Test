@@ -19,6 +19,6 @@ jobs :
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}
-          path: target/release/test(|.exe|.dll)
+          path: target/release/test?(.exe|.dll)
           retention-days: 1
 

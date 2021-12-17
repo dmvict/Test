@@ -1,0 +1,12 @@
+
+name : push
+
+on: [ push ]
+
+jobs :
+
+  build :
+    uses : dmvict/Test/.github/workflows/Common.yml@master
+    with :
+      debug : true
+

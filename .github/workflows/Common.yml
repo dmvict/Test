@@ -1,0 +1,17 @@
+
+name : linux
+
+on:
+  workflow_call:
+    inputs:
+      debug:
+        required: true
+        type: boolean
+
+jobs :
+
+  build :
+    runs-on: ubuntu-latest
+    steps :
+      - run : cargo ${{ inputs.debug == true }}
+

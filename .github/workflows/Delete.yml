@@ -4,19 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       days:
-        description: 'Number of days.'
+        older-than-seconds: 'Delete older than the number of seconds ( default is 90 days ).'
         required: true
         type: number
-        default: 90
+        default: 7776000
 
 jobs:
   del_runs:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.event.inputs.days * 5 }}
-      # - name: Delete workflow runs
-      #   uses: Mattraks/delete-workflow-runs@main
-      #   with:
-      #     token: ${{ secrets.AUTH_PAT }}
-      #     repository: ${{ github.repository }}
-      #     retain_days: ${{ github.event.inputs.days }}
+      - name: Delete workflow runs
+        uses: MajorScruffy/delete-workflow-runs
+        with:
+          repository:  obox-systems/rust_game_template
+          older-than-seconds: 86400
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}

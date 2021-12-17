@@ -1,0 +1,39 @@
+
+name : push
+
+on: [ push ]
+
+jobs :
+
+  build :
+    uses : dmvict/Test/.github/workflows/Linux.yml@master
+
+  last :
+    needs: [ build ]
+    runs-on : ubuntu-latest
+    steps :
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: ubuntu
+          path: out/linux_release
+      - uses: actions/download-artifact@v2
+        with:
+          name: macos
+          path: out/macos_release
+      - uses: actions/download-artifact@v2
+        with:
+          name: windows
+          path: out/windows_release
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@v1.3
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
+        with:
+          source-directory: 'out'
+          target-directory: 'out'
+          destination-github-username: 'dmvict'
+          destination-repository-name: 'test-push'
+          user-email: dm.vict.kr@gmail.com
+          target-branch: master
+

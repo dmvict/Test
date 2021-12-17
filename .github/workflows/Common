@@ -1,14 +1,27 @@
 
-name : exp
+name : linux
 
 on: [ workflow_call ]
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs :
 
-  main :
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo hello
+  build :
+    if : "!contains( github.event.head_commit.message, 'Automated' )"
+    strategy :
+      fail-fast : false
+      matrix :
+        os : [ ubuntu, windows, macos ]
+    runs-on: ${{ matrix.os }}-latest
+    steps :
+      - uses: actions/checkout@v2
+      - run : cargo build --release
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: |
+            target/release/test
+            target/release/test.dll
+            target/release/test.exe
+          retention-days: 1
+

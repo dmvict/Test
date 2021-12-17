@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       days:
-        older-than-seconds: 'Delete older than the number of days.'
+        description: 'Delete older than the number of days.'
         required: true
         type: number
         default: 90

@@ -33,7 +33,7 @@ jobs :
           API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
         with:
           source-directory: out
-          target-directory: out/${{ github.ref_name }}
+          target-directory: out
           destination-github-username: 'dmvict'
           destination-repository-name: 'test-push'
           user-email: dm.vict.kr@gmail.com

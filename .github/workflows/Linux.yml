@@ -31,4 +31,3 @@ jobs :
             target/release/test.exe
             target/release/test.dll
           retention-days: 1
-

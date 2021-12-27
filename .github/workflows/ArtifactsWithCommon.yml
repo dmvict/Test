@@ -14,6 +14,7 @@ jobs :
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v2
+      - run: rm -rf out/*
       - uses: actions/download-artifact@v2
         with:
           name: ubuntu
@@ -31,8 +32,8 @@ jobs :
         env:
           API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
         with:
-          source-directory: 'out'
-          target-directory: 'out'
+          source-directory: out
+          target-directory: out/${{ github.ref_name }}
           destination-github-username: 'dmvict'
           destination-repository-name: 'test-push'
           user-email: dm.vict.kr@gmail.com

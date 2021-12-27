@@ -17,19 +17,19 @@ jobs :
       - uses: actions/download-artifact@v2
         with:
           name: ubuntu
-          path: out/${{ github.ref }}/linux_release
+          path: out/${{ github.ref_name }}/linux_release
       - uses: actions/download-artifact@v2
         with:
           name: macos
-          path: out/${{ github.ref }}/macos_release
+          path: out/${{ github.ref_name }}/macos_release
       - uses: actions/download-artifact@v2
         with:
           name: windows
-          path: out/${{ github.ref }}/windows_release
+          path: out/${{ github.ref_name }}/windows_release
       - run: rm -rf out/*
-      - run: echo '[linux](https://github.com/dmvict/test-push/raw/master/${{ github.ref }}/linux_release/test)' >> ${{ github.ref }}.md
-      - run: echo '[macos](https://github.com/dmvict/test-push/raw/master/${{ github.ref }}/macos_release/test)' >> ${{ github.ref }}.md
-      - run: echo '[windows](https://github.com/dmvict/test-push/raw/master/${{ github.ref }}/windows_release)' >> ${{ github.ref }}.md
+      - run: echo '[linux](https://github.com/dmvict/test-push/raw/master/${{ github.ref_name }}/linux_release/test)' >> ${{ github.ref_name }}.md
+      - run: echo '[macos](https://github.com/dmvict/test-push/raw/master/${{ github.ref_name }}/macos_release/test)' >> ${{ github.ref_name }}.md
+      - run: echo '[windows](https://github.com/dmvict/test-push/raw/master/${{ github.ref_name }}/windows_release)' >> ${{ github.ref_name }}.md
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@v1.3
         env:

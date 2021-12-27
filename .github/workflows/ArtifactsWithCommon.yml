@@ -50,3 +50,4 @@ jobs :
           token: ${{ secrets.PRIVATE_TOKEN }}
           message: Automated commit
           glob-patterns: out/
+

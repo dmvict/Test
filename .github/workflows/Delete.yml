@@ -10,3 +10,14 @@ jobs:
     steps:
       - name: Delete workflow runs
         uses: dmvict/clean-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repo: dmvict/Test
+          branch: alpha
+          run_conclusions: |
+            success
+            failure
+            cancelled
+            skipped
+          save_min_runs_number: 14
+          save_period: '15:00:00'

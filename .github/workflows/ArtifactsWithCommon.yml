@@ -59,28 +59,28 @@ jobs :
     env :
       PRIVATE_TOKEN : ${{ secrets.PRIVATE_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-      - run: mkdir -p exp
-      - run: cp -R out exp
-      - run: cp Cargo.toml exp/Cargo.toml
-      - run: cp README.md exp/Readme.md
-      - name: Publish changes in release repo
-        uses: vinayb21/github-action-push-to-another-repo@1.4.0
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
-        with:
-          source-directory: exp
-          destination-github-username: dmvict
-          destination-repository-name: test-push
-          user-email: dm.vict.kr@gmail.com
-          commit-message: ${{ github.event.head_commit.message }}
-          tag: ${{ github.ref_name }}
+      # - uses: actions/checkout@v2
+      # - run: mkdir -p exp
+      # - run: cp -R out exp
+      # - run: cp Cargo.toml exp/Cargo.toml
+      # - run: cp README.md exp/Readme.md
+      # - name: Publish changes in release repo
+      #   uses: vinayb21/github-action-push-to-another-repo@1.4.0
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN }}
+      #   with:
+      #     source-directory: exp
+      #     destination-github-username: dmvict
+      #     destination-repository-name: test-push
+      #     user-email: dm.vict.kr@gmail.com
+      #     commit-message: ${{ github.event.head_commit.message }}
+      #     tag: ${{ github.ref_name }}
       - uses: alice-biometrics/release-creator/@v1.0.5
         with:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
           version: ${{ github.ref_name }}
           description: 'Release from development repository: ${{ github.repository }}'
-          repo: test-push
+          # repo: test-push
           branch: master
           prerelease: false
           draft: false

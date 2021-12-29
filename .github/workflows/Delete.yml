@@ -5,8 +5,6 @@ on: [ push ]
 jobs:
   del_runs:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Delete workflow runs
         uses: dmvict/clean-action@master
@@ -14,10 +12,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repo: dmvict/Test
           branch: alpha
-          run_conclusions: |
-            success
-            failure
-            cancelled
-            skipped
-          save_min_runs_number: 14
+          run_conclusions: failure
+          save_min_runs_number: 1
           save_period: '15:00:00'

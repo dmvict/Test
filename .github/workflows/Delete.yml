@@ -10,8 +10,7 @@ jobs:
         uses: dmvict/clean-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repo: dmvict/Test
           branch: alpha
           run_conclusions: failure
-          save_min_runs_number: 1
+          save_min_runs_number: 0
           save_period: '15:00:00'

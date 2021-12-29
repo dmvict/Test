@@ -10,7 +10,5 @@ jobs:
         uses: dmvict/clean-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: alpha
-          run_conclusions: failure
           save_min_runs_number: 0
-          save_period: '15:00:00'
+          save_period: 14

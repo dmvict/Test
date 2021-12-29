@@ -1,0 +1,10 @@
+
+name: Delete
+on: [ push ]
+
+jobs:
+  del_runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete workflow runs
+        uses: dmvict/clean-action@master

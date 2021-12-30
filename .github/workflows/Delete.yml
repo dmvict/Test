@@ -3,12 +3,23 @@ name: Delete
 on: [ push ]
 
 jobs:
-  del_runs:
+  delete_runs:
+    strategy :
+      matrix :
+        repository :
+          - wTranspile
+          - wModuleForTesting1b
+          - wCensorBasic
     runs-on: ubuntu-latest
     steps:
       - name: Delete workflow runs
         uses: dmvict/clean-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
+          repo: dmvict/${{ matrix.repository }}
+          run_conclusions: |
+            cancelled
+            skipped
+          save_period: 30
           save_min_runs_number: 0
-          save_period: 14
+

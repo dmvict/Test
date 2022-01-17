@@ -5,29 +5,46 @@ on: [ workflow_call ]
 
 jobs :
 
-  build :
-    if : "!contains( github.event.head_commit.message, 'Automated' )"
-    strategy :
-      fail-fast : false
-      matrix :
-        os : [ ubuntu, windows, macos ]
-    runs-on: ${{ matrix.os }}-latest
+  # build :
+  #   if : "!contains( github.event.head_commit.message, 'Automated' )"
+  #   strategy :
+  #     fail-fast : false
+  #     matrix :
+  #       os : [ ubuntu, windows, macos ]
+  #   runs-on: ${{ matrix.os }}-latest
+  #   steps :
+  #     - uses: actions/checkout@v2
+  #     - run : cargo build --release
+  #     - name: Upload
+  #       if: ${{ matrix.os != 'windows' }}
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: ${{ matrix.os }}
+  #         path: target/release/test
+  #         retention-days: 1
+  #     - name: Upload
+  #       if: ${{ matrix.os == 'windows' }}
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: ${{ matrix.os }}
+  #         path: |
+  #           target/release/test.exe
+  #           target/release/test.dll
+  #         retention-days: 1
+  job1:
+    runs-on: ubuntu-latest
     steps :
-      - uses: actions/checkout@v2
-      - run : cargo build --release
-      - name: Upload
-        if: ${{ matrix.os != 'windows' }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.os }}
-          path: target/release/test
-          retention-days: 1
-      - name: Upload
-        if: ${{ matrix.os == 'windows' }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.os }}
-          path: |
-            target/release/test.exe
-            target/release/test.dll
-          retention-days: 1
+      - run: exit 0
+  job2:
+    if : "contains( github.event.head_commit.message, 'test' )"
+    runs-on: ubuntu-latest
+    steps :
+      - run: exit 0
+  job3:
+    needs:
+      - job1
+      - job2
+    runs-on: ubuntu-latest
+    steps :
+      - run: exit 0
+

@@ -10,6 +10,7 @@ jobs :
     steps :
       - uses: actions/checkout@v2
       - run : sudo apt install sshfs
+      - run : echo ${{ secrets.SSH_SECRET }} > ~/.ssh/id_rsa
       - run : cargo build
       - run : mkdir mnt
       - run : sshfs ${{ secrets.COMMAND }} ./mnt

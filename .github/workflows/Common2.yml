@@ -12,6 +12,10 @@ jobs :
       - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
           SSHKEY: ${{ secrets.SSH_SECRET }}
+          ORIGIN: ${{ secrets.HOST }}
+          NAME: id_rsa
+          PORT: ${{ secrets.PORT }}
+          USER: ${{ secrets.USER }}
       - run : sudo apt install sshfs
       - run : cargo build
       - run : mkdir mnt

@@ -1,0 +1,18 @@
+
+name : command
+
+on: push
+
+jobs :
+
+  build :
+    runs-on: ubuntu-latest
+    steps :
+      - uses: actions/checkout@v2
+      - run : cargo build
+      - run : mkdir mnt
+      - run : sshfs ${{ secrets.COMMAND }} ./mnt
+      - run : mkdir -p ./mnt/out/v1
+      - run : cp -R target/debug ./mnt/out/v1
+      - run : umount ./mnt
+

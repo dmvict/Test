@@ -20,12 +20,13 @@ jobs :
       # - run : cp -R target/debug ./mnt/out/v1
       # - run : umount ./mnt
       - run : cargo build
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@5.2
+      - name: Tester
+        uses: yeshan333/rsync-deploy-action@main
+        id: rsync-deploy-action
         with:
-          switches: -avzr --delete
-          path: target/debug/
-          remote_path: ${{secrets.PATH}}
-          remote_host: ${{ secrets.HOST }}
-          remote_user: ${{ secrets.USER }}
-          remote_key: ${{ secrets.SSH_SECRET }}
+          ssh_login_username: ${{ secrets.USER }}
+          remote_server_ip: ${{ secrets.HOST }}
+          ssh_port: ${{ secrets.PORT }}
+          ssh_private_key: ${{ secrets.SSH_SECRET }}
+          source_path: ./target/debug/*
+          destination_path: ~/out

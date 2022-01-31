@@ -9,14 +9,23 @@ jobs :
     runs-on: ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - uses: tanmancan/action-setup-ssh-agent-key@1.0.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_SECRET }}
-      - run : sudo apt install sshfs
+      # - uses: tanmancan/action-setup-ssh-agent-key@1.0.0
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_SECRET }}
+      # - run : sudo apt install sshfs
+      # - run : cargo build
+      # - run : mkdir mnt
+      # - run : sshfs ${{ secrets.COMMAND }} ./mnt
+      # - run : mkdir -p ./mnt/out/v1
+      # - run : cp -R target/debug ./mnt/out/v1
+      # - run : umount ./mnt
       - run : cargo build
-      - run : mkdir mnt
-      - run : sshfs ${{ secrets.COMMAND }} ./mnt
-      - run : mkdir -p ./mnt/out/v1
-      - run : cp -R target/debug ./mnt/out/v1
-      - run : umount ./mnt
-
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2
+        with:
+          switches: -avzr --delete
+          path: target/debug/
+          remote_path: ${{secrets.PATH}}
+          remote_host: ${{ secrets.HOST }}
+          remote_user: ${{ secrets.USER }}
+          remote_key: ${{ secrets.SSH_SECRET }}

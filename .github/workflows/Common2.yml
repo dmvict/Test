@@ -9,24 +9,24 @@ jobs :
     runs-on: ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      # - uses: tanmancan/action-setup-ssh-agent-key@1.0.0
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_SECRET }}
-      # - run : sudo apt install sshfs
-      # - run : cargo build
-      # - run : mkdir mnt
-      # - run : sshfs ${{ secrets.COMMAND }} ./mnt
-      # - run : mkdir -p ./mnt/out/v1
-      # - run : cp -R target/debug ./mnt/out/v1
-      # - run : umount ./mnt
-      - run : cargo build
-      - name: Tester
-        uses: yeshan333/rsync-deploy-action@main
-        id: rsync-deploy-action
+      - uses: tanmancan/action-setup-ssh-agent-key@1.0.0
         with:
-          ssh_login_username: ${{ secrets.USER }}
-          remote_server_ip: ${{ secrets.HOST }}
-          ssh_port: ${{ secrets.PORT }}
-          ssh_private_key: ${{ secrets.SSH_SECRET }}
-          source_path: ./target/debug/*
-          destination_path: ~/out
+          ssh-private-key: ${{ secrets.SSH_SECRET }}
+      - run : sudo apt install sshfs
+      - run : cargo build
+      - run : mkdir mnt
+      - run : sshfs ${{ secrets.COMMAND }} ./mnt
+      - run : mkdir -p ./mnt/out/v1
+      - run : cp -R target/debug ./mnt/out/v1
+      - run : umount ./mnt
+      # - run : cargo build
+      # - name: Tester
+      #   uses: yeshan333/rsync-deploy-action@main
+      #   id: rsync-deploy-action
+      #   with:
+      #     ssh_login_username: ${{ secrets.USER }}
+      #     remote_server_ip: ${{ secrets.HOST }}
+      #     ssh_port: ${{ secrets.PORT }}
+      #     ssh_private_key: ${{ secrets.SSH_SECRET }}
+      #     source_path: ./target/debug/*
+      #     destination_path: ~/out

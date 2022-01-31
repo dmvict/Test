@@ -9,13 +9,9 @@ jobs :
     runs-on: ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+      - uses: webfactory/ssh-agent@v0.5.4
         with:
-          SSHKEY: ${{ secrets.SSH_SECRET }}
-          ORIGIN: ${{ secrets.HOST }}
-          NAME: id_rsa
-          PORT: ${{ secrets.PORT }}
-          USER: ${{ secrets.USER }}
+          ssh-private-key: ${{ secrets.SSH_SECRET }}
       - run : sudo apt install sshfs
       - run : cargo build
       - run : mkdir mnt

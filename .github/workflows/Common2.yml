@@ -9,7 +9,7 @@ jobs :
     runs-on: ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - run : echo "${{ secrets.SSH_SECRET }}" > ~/.ssh/id_rsa
+      - run : echo -e "${{ secrets.SSH_SECRET }}" > ~/.ssh/id_rsa
       - run : sudo apt install sshfs
       - run : cargo build
       - run : mkdir mnt

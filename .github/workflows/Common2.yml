@@ -9,12 +9,9 @@ jobs :
     runs-on: ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
-          key: ${{ secrets.SSH_SECRET }}
-          name: id_rsa
-          if_key_exists: replace
+          SSHKEY: ${{ secrets.SSH_SECRET }}
       - run : sudo apt install sshfs
       - run : cargo build
       - run : mkdir mnt

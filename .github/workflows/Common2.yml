@@ -18,4 +18,5 @@ jobs :
       - name: automerge
         uses: ridedott/merge-me-action@v2
         with:
+          GITHUB_LOGIN: dmvict
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

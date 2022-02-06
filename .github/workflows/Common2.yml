@@ -1,7 +1,7 @@
 
 name : command
 
-on: push
+on: pull_request
 
 jobs :
 
@@ -9,14 +9,13 @@ jobs :
     runs-on: ubuntu-latest
     steps :
       - uses: actions/checkout@v2
-      - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
-        with:
-          ssh-private-key: ${{ secrets.SSH_SECRET }}
-          ssh-host: 167.172.101.139
-      - run : sudo apt install sshfs
       - run : cargo build
-      - run : mkdir mnt
-      - run : sshfs server@167.172.101.139:/home/server ./mnt
-      - run : mkdir -p ./mnt/out/v1
-      - run : cp -R target/debug ./mnt/out/v1
-      - run : umount ./mnt
+
+  automerge:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@v0.14.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

@@ -15,8 +15,10 @@ jobs :
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: automerge
-        uses: ridedott/merge-me-action@v2
+      - run: echo ${{ github.event.number}}
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
         with:
-          GITHUB_LOGIN: dmvict
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.number }}
+          method: merge

@@ -1,0 +1,24 @@
+
+name : command
+
+on: pull_request
+
+jobs :
+
+  build :
+    runs-on: ubuntu-latest
+    steps :
+      - uses: actions/checkout@v2
+      - run : cargo build
+
+  automerge:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.number}}
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.number }}
+          method: merge

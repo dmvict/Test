@@ -1,7 +1,9 @@
 
 name : command
 
-on: pull_request
+on:
+  pull_request_target:
+    types: [opened, edited]
 
 jobs :
 
@@ -14,7 +16,7 @@ jobs :
         with:
           target: master
           include: beta
-          exclude: Github:.*
+          # exclude: Github:.*
           change-to: alpha
           comment: |
             Your PR was set to `main`, PRs should be sent to `development`

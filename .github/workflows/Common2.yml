@@ -15,8 +15,8 @@ jobs :
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           target: master
-          include: beta
-          # exclude: Github:.*
+          # include: beta
+          exclude: beta
           change-to: alpha
           comment: |
             Your PR was set to `main`, PRs should be sent to `development`

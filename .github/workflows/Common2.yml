@@ -10,10 +10,10 @@ jobs :
   build:
     runs-on: ubuntu-latest
     steps:
-      # - run : echo ref ${{ github.ref }}
-      # - run : echo base_ref ${{ github.base_ref }}
-      # - run : echo head_ref ${{ github.head_ref }}
-      # - run : echo actor ${{ github.actor }}
+      - run : echo ref ${{ github.ref }}
+      - run : echo base_ref ${{ github.base_ref }}
+      - run : echo head_ref ${{ github.head_ref }}
+      - run : echo actor ${{ github.actor }}
       - uses: Vankka/pr-target-branch-action@v1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +22,7 @@ jobs :
           # include: beta
           exclude: dmvict:beta
           # change-to: alpha
-          comment: |
-            Your PR was set to `main`, PRs should be sent to `development`
-            The base branch of this PR has been automatically changed to `development`, please check that there are no merge conflicts
+          # comment: |
+          #   Your PR was set to `main`, PRs should be sent to `development`
+          #   The base branch of this PR has been automatically changed to `development`, please check that there are no merge conflicts
 

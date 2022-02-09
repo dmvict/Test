@@ -13,6 +13,7 @@ jobs :
       - run : echo ref ${{ github.ref }}
       - run : echo base_ref ${{ github.base_ref }}
       - run : echo head_ref ${{ github.head_ref }}
+      - run : echo actor ${{ github.actor }}
       # - uses: Vankka/pr-target-branch-action@v1.1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

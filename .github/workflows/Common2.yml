@@ -29,3 +29,10 @@ jobs :
         run : |
           echo -e 'The base branch of this PR has been automatically changed to `development`,\n\nplease check that there are no merge conflicts'
 
+
+    android:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - run : echo ref ${{ github.ref }}
+

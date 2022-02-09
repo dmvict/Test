@@ -25,4 +25,7 @@ jobs :
           # comment: |
           #   Your PR was set to `main`, PRs should be sent to `development`
           #   The base branch of this PR has been automatically changed to `development`, please check that there are no merge conflicts
+      - if: ${{ cancelled() }}
+        run : |
+          echo -e 'The base branch of this PR has been automatically changed to `development`,\n\nplease check that there are no merge conflicts'
 

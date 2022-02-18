@@ -39,10 +39,7 @@ jobs :
 
   forward :
     needs:
-      - android
-      - desktop
-      - ios
-      - web
+      - run
     runs-on : ubuntu-latest
     steps :
       - name: Automerge passed pull request

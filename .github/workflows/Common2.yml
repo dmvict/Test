@@ -26,7 +26,7 @@ jobs :
       - uses: Vankka/pr-target-branch-action@v1.1
         with:
           target: beta
-          exclude: motion-design-school:alpha
+          exclude: dmvict:alpha
       - name: Error message
         if: ${{ failure() }}
         run : echo -e 'To save the application stability the repository uses a system to forward changes from an unstable branch to a stable.\nThe unstable branch is `alpha`. All user pull requests should be opened to this branch.\nThe staging branch is `beta`. Changes to this branch are forwarded by a pull request from branch `alpha` automatically.\nThe stable branch is `master`. Changes to this branch are forwarded by a pull request from branch `beta` automatically. Forwarded changes merge manually after review.\n\nThe base branch of this PR has been automatically changed to `alpha` taking into account the described system `alpha -> beta -> master`.\nPlease, check that there are no merge conflicts.'

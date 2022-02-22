@@ -33,22 +33,22 @@ jobs :
           exclude: dmvict:alpha
           comment : 'To save the application stability the repository uses a system to forward changes from an unstable branch to a stable.\nThe unstable branch is `alpha`. All user pull requests should be opened to this branch.\nThe staging branch is `beta`. Changes to this branch are forwarded by a pull request from branch `alpha` automatically.\nThe stable branch is `master`. Changes to this branch are forwarded by a pull request from branch `beta` automatically. Forwarded changes merge manually after review.\n\nThe base branch of this PR has been automatically changed to `alpha` taking into account the described system `alpha -> beta -> master`.\nPlease, check that there are no merge conflicts.'
       - name: check output
-        run : echo ${{ steps.validation.outputs.wrong-target }}
+        run : echo ${{ steps.validation.outputs.wrong-target == true }}
 
-  run:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - run: sleep 180 && echo done!
-
-  forward :
-    needs:
-      - run
-    runs-on : ubuntu-latest
-    steps :
-      - name: Automerge passed pull request
-        uses: juliangruber/merge-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.PRIVATE_TOKEN }}
-          number: ${{ github.event.number }}
-          method: merge
+  # run:
+  #   needs: check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: sleep 180 && echo done!
+  #
+  # forward :
+  #   needs:
+  #     - run
+  #   runs-on : ubuntu-latest
+  #   steps :
+  #     - name: Automerge passed pull request
+  #       uses: juliangruber/merge-pull-request-action@v1
+  #       with:
+  #         github-token: ${{ secrets.PRIVATE_TOKEN }}
+  #         number: ${{ github.event.number }}
+  #         method: merge

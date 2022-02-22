@@ -35,20 +35,20 @@ jobs :
       - name: check output
         run : echo ${{ steps.validation.outputs.wrong-target == true }}
 
-  run:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - run: sleep 180 && echo done!
-
-  forward :
-    needs:
-      - run
-    runs-on : ubuntu-latest
-    steps :
-      - name: Automerge passed pull request
-        uses: juliangruber/merge-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.PRIVATE_TOKEN }}
-          number: ${{ github.event.number }}
-          method: merge
+  # run:
+  #   needs: check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: sleep 180 && echo done!
+  #
+  # forward :
+  #   needs:
+  #     - run
+  #   runs-on : ubuntu-latest
+  #   steps :
+  #     - name: Automerge passed pull request
+  #       uses: juliangruber/merge-pull-request-action@v1
+  #       with:
+  #         github-token: ${{ secrets.PRIVATE_TOKEN }}
+  #         number: ${{ github.event.number }}
+  #         method: merge

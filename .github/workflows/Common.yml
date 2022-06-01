@@ -14,7 +14,7 @@ jobs :
     strategy :
       fail-fast : false
       matrix :
-        version : ${{ toJson( inputs.matrix ) }}
+        version : ${{ fromJson( inputs.matrix ) }}
     runs-on : ubuntu-latest
     steps :
       - run : echo ${{ matrix.version }}

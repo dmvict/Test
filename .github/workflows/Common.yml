@@ -11,10 +11,21 @@ on :
 jobs :
 
   fast :
+    if : ${{ inputs.matrix == 'single' }}
     strategy :
       fail-fast : false
       matrix :
-        version : ${{ inputs.matrix }}
+        version : [ 14.x ]
+    runs-on : ubuntu-latest
+    steps :
+      - run : echo ${{ matrix.version }}
+
+  not_fast :
+    if : ${{ inputs.matrix != 'single' }}
+    strategy :
+      fail-fast : false
+      matrix :
+        version : [ 14.x, 15.x, 16.x ]
     runs-on : ubuntu-latest
     steps :
       - run : echo ${{ matrix.version }}

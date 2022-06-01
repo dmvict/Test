@@ -8,4 +8,4 @@ jobs :
   build:
     uses : dmvict/Test/.github/workflows/Common.yml@master
     with :
-      matrix : '[14.x, 15.x]'
+      matrix : '{"version:["14.x"]"}'

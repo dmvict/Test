@@ -8,4 +8,4 @@ jobs :
   build:
     uses : dmvict/Test/.github/workflows/Common.yml@master
     with :
-      matrix : '[14.x]'
+      matrix : '{ "os" : [ "ubuntu-latest", "windows-latest", "macos-latest" ], "version" : [ "14.x" ] }'

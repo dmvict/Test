@@ -8,4 +8,4 @@ jobs :
   build:
     uses : dmvict/Test/.github/workflows/Common.yml@master
     with :
-      matrix : single
+      matrix : '[14.x]'

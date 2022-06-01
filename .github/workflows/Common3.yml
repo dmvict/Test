@@ -1,5 +1,5 @@
 
-name : command
+name : command2
 
 on: push
 
@@ -8,4 +8,4 @@ jobs :
   build:
     uses : dmvict/Test/.github/workflows/Common.yml@master
     with :
-      matrix : not_single
+      matrix : '[14.x, 15.x]'

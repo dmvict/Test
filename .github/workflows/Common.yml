@@ -17,4 +17,4 @@ jobs :
         version : ${{ inputs.matrix }}
     runs-on : ubuntu-latest
     steps :
-      - name : echo ${{ matrix.version }}
+      - run : echo ${{ matrix.version }}

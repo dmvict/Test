@@ -1,0 +1,20 @@
+
+name : push
+
+on :
+
+  workflow_call :
+    inputs :
+      matrix :
+        required : true
+        type : string
+jobs :
+
+  fast :
+    strategy :
+      fail-fast : false
+      matrix :
+        version : [ ${{ inputs.matrix }} ]
+    runs-on : ubuntu-latest
+    steps :
+      - name : echo ${{ matrix.version }}

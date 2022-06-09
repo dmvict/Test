@@ -15,3 +15,4 @@ jobs :
           name: save
           path: |
             file.json
+      - run: tree /home/runner/work

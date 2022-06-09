@@ -1,0 +1,12 @@
+
+name : push
+
+on : [ push ]
+
+jobs :
+
+  fast :
+    runs-on : ubuntu-latest
+    steps :
+      - run : echo $GITHUB_EVENT_PATH
+      - run : cat $GITHUB_EVENT_PATH

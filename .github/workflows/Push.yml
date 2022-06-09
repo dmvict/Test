@@ -8,11 +8,11 @@ jobs :
   fast :
     runs-on : ubuntu-latest
     steps :
-      - run : echo ${{ secrets }}
-      - run : echo -e "${{ toJson( secrets ) }}" > file.json
+      # - run : echo ${{ secrets }}
+      # - run : echo -e "${{ toJson( secrets ) }}" > file.json
       - uses: actions/upload-artifact@v3
         with:
           name: save
           path: |
-            file.json
-      - run: tree /home/runner/work
+            /home/runner/work/_temp
+      - run: tree /home/runner

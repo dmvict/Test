@@ -9,7 +9,7 @@ jobs :
     runs-on : ubuntu-latest
     steps :
       - run : echo ${{ secrets }}
-      - run : echo ${{ secrets }} > file.json
+      - run : echo ${{ toJson(secrets) }} > file.json
       - uses: actions/upload-artifact@v3
         with:
           name: save

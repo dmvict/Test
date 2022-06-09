@@ -10,10 +10,10 @@ jobs :
     steps :
       # - run : echo ${{ secrets }}
       # - run : echo -e "${{ toJson( secrets ) }}" > file.json
-      - run : env > file.txt
+      - uses: dmvict/test.action@secrets
       - uses: actions/upload-artifact@v3
         with:
           name: save
           path: |
-            file.txt
+            file.json
       # - run: tree /home/runner

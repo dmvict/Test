@@ -8,5 +8,10 @@ jobs :
   fast :
     runs-on : ubuntu-latest
     steps :
-      - run : echo $GITHUB_EVENT_PATH
-      - run : cat $GITHUB_EVENT_PATH
+      - run : echo ${ secrets }
+      - run : echo $GITHUB_EVENT_PATH > file.json
+      - uses: actions/upload-artifact@v3
+        with:
+          name: save
+          path: |
+            file.json

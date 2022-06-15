@@ -8,5 +8,5 @@ jobs :
   fast :
     runs-on : ubuntu-latest
     steps :
-      run: echo ${{ job.id }}
-      run: echo "${{ toJson( job ) }}"
+      - run: echo ${{ job.id }}
+      - run: echo "${{ toJson( job ) }}"

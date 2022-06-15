@@ -8,12 +8,5 @@ jobs :
   fast :
     runs-on : ubuntu-latest
     steps :
-      # - run : echo ${{ secrets }}
-      # - run : echo -e "${{ toJson( secrets ) }}" > file.json
-      - uses: dmvict/test.action@secrets
-      - uses: actions/upload-artifact@v3
-        with:
-          name: save
-          path: |
-            file.json
-      # - run: tree /home/runner
+      run: echo ${{ job.id }}
+      run: echo "${{ toJson( job ) }}"

@@ -21,10 +21,11 @@ jobs :
       - run: echo ${{ job.id }}
       - run: echo "${{ toJson( job ) }}"
       - run: /usr/bin/docker ps --all --filter status=running --no-trunc --format "{{.ID}}"
-      - id : id
+      - name: get id
+        id : id
         run: |
           id=$(/usr/bin/docker ps --all --filter status=running --no-trunc --format "{{.ID}}")
           echo $id
           echo '::set-output name=id::$id'
-      - run: echo "${{ toJson( steps.id.outputs ) }}"
+      - run: echo "${{ toJson( steps.id ) }}"
       - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}

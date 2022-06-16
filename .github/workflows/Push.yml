@@ -28,3 +28,27 @@ jobs :
           echo "::set-output name=id::$id"
       - run: echo "${{ toJson( steps.id ) }}"
       - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}
+
+  full :
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 10
+        ports:
+          # Maps TCP port 5432 in the service container to a randomly chosen available port on the host.
+          - 5433
+
+    runs-on : ubuntu-latest
+    steps :
+      - run: echo ${{ job.id }}
+      - run: echo "${{ toJson( job ) }}"
+      - name: get id
+        id : id
+        run: |
+          id=$(/usr/bin/docker ps --all --filter status=running --no-trunc --format "{{.ID}}")
+          echo its id $id
+          echo "::set-output name=id::$id"
+      - run: echo "${{ toJson( steps.id ) }}"
+      - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}

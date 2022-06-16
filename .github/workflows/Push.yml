@@ -20,4 +20,4 @@ jobs :
     steps :
       - run: echo ${{ job.id }}
       - run: echo "${{ toJson( job ) }}"
-      - run: env
+      - run: /usr/bin/docker ps --all --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"

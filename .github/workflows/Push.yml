@@ -15,8 +15,9 @@ jobs :
         ports:
           # Maps TCP port 5432 in the service container to a randomly chosen available port on the host.
           - 5432
-    matrix:
-      os: [ ubuntu-latest, macos-latest, windows-latest ]
+    strategy :
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
 
     runs-on : ${{ matrix.os }}
     steps :

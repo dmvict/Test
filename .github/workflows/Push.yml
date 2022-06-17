@@ -21,7 +21,9 @@ jobs :
 
     runs-on : ${{ matrix.os }}
     steps :
-      - run: where docker
+      - run: Get-Command docker
+      - shell: cmd
+        run: Get-Command docker
       # - run: echo ${{ job.id }}
       # - run: echo "${{ toJson( job ) }}"
       # - name: get id

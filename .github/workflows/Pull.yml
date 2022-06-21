@@ -1,0 +1,12 @@
+
+name : pull
+
+on : [ pull_request ]
+
+jobs :
+
+  fast:
+    runs-on : ubuntu-latest
+    steps :
+      - run: echo "${{ toJson( github.event ) }}"
+

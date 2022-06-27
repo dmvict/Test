@@ -38,7 +38,12 @@ jobs :
   #     - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}
 
   fast:
-    runs-on : ubuntu-latest
+    strategy :
+      fail-fast : false
+      matrix :
+        os : [ ubuntu-latest, windows-latest ]
+        v : [ 14, 16 ]
+    runs-on : ${{ matrix.os }}
     steps :
       - name: matrix
         uses: dmvict/test.action@exp

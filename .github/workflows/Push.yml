@@ -40,10 +40,5 @@ jobs :
   fast:
     runs-on : ubuntu-latest
     steps :
-      - run: echo ${{ '12.9.1' > '14.x' }}
-      - run: echo ${{ '14.x' > '16.x' }}
-      - run: echo ${{ '16.x' > '18.x' }}
-      - run: echo ${{ '12.9.1' < '14.x' }}
-      - run: echo ${{ '14.x' < '16.x' }}
-      - run: echo ${{ '16.x' < '18.x' }}
-
+      - name: matrix
+        uses: dmvict/test.action@exp

@@ -1,0 +1,18 @@
+
+name : exp
+
+on :
+
+  workflow_call :
+    inputs :
+      matrix :
+        required : true
+        type : string
+
+jobs:
+  exp :
+    runs-on : ubuntu-latest
+    steps :
+      - echo ${{ inputs.matrix }}"
+      - echo "${{ toJson( inputs.matrix ) }}"
+

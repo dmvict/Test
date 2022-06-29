@@ -27,9 +27,9 @@ jobs:
           INPUT_W : ${{ env.INPUT_W }}
         id: some
         run: |
-        v=$(echo $INPUT_W | sed 's/\s/\n/g')
-        export INPUT_B=$v
-        echo -e "$v"
+          v=$(echo $INPUT_W | sed 's/\s/\n/g')
+          export INPUT_B=$v
+          echo -e "$v"
       - run: echo "$INPUT_B"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main

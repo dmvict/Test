@@ -17,10 +17,10 @@ on :
         required : true
         type : number
         default : 0
-      conclusion :
-        description : 'Conclusion.'
-        required : true
-        default : ""
+      # conclusion :
+      #   description : 'Conclusion.'
+      #   required : true
+      #   default : ""
       branch :
         description : 'Branch.'
         required : true
@@ -36,7 +36,7 @@ jobs:
           token: ${{ secrets.PRIVATE_TOKEN }}
           repo: dmvict/wTools
           branch : ${{ github.event.inputs.branch }}
-          run_conclusions: ${{ github.event.inputs.conclusion }}
+          # run_conclusions: ${{ github.event.inputs.conclusion }}
           save_period: ${{ github.event.inputs.days }}
           save_min_runs_number: ${{ github.event.inputs.days }}
 

@@ -51,7 +51,8 @@ jobs :
             NAME=$(echo $WORKFLOW | sed 's/\(\S\+\).yml/\1/')
             NAMES="$NAMES $NAME"
           done;
-          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split(" ")[1:-1]')
+          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
+          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
           echo "::set-output name=files::$OUTPUT"
       - id: workflow_names
         run: |
@@ -60,7 +61,8 @@ jobs :
             NAME=$(cat .github/workflows/$WORKFLOW | grep -G '^name :' | sed 's/name\s*:\s\+\(\S*\)/\1/')
             NAMES="$NAMES $NAME"
           done;
-          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split(" ")[1:-1]')
+          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
+          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
           echo "::set-output name=names::$OUTPUT"
 
   test :

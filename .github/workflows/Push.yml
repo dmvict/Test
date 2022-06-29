@@ -37,9 +37,25 @@ jobs :
   #     - run: echo "${{ toJson( steps.id ) }}"
   #     - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}
 
-  fast:
-    runs-on : ubuntu-latest
-    steps :
-      - uses : actions/checkout@v2
-      - run: ls .github/workflows
-      - run: ls .github/workflows | grep Module
+  get:
+    outputs :
+      workflow_files: ${{ steps.workflow_files.outputs.files }}
+      workflow_names: ${{ steps.workflow_names.outputs.names }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: workflow_files
+        run: |
+          WORKFLOWS=$(ls .github/workflows | grep Common)
+          for WORKFLOW in $WORKFLOWS ; do
+            NAME=$(echo $WORKFLOW | sed 's/\(\S\+\).yml/\1/')
+            NAMES="$NAMES $NAME"
+          done;
+          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
+          OUTPUT=$(echo -e "$NAMES" | jq -R '[.]' | jq -s -c 'add')
+          echo "::set-output name=files::$OUTPUT"
+          echo -e "::set-output name=files2::$NAMES"
+          echo "::set-output name=files3::"$NAMES""
+      - run: echo ${{ steps.workflow_files.outputs.files }}
+      - run: echo ${{ steps.workflow_files.outputs.files2 }}
+      - run: echo ${{ steps.workflow_files.outputs.files3 }}

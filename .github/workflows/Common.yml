@@ -11,6 +11,8 @@ on :
       modules :
         required : true
         type : string
+env:
+  INPUT_W : ${{ inputs.modules }}
 
 jobs:
   wait_for_modules :
@@ -23,8 +25,7 @@ jobs:
       - name: some
         id: some
         run: |
-        v=$INPUT_W
-        v=$( echo $v | sed 's/\s/\n/g')
+        v=$( echo $INPUT_W | sed 's/\s/\n/g')
         export INPUT_B=$v
         echo -e "$v"
       - run: echo "$INPUT_B"

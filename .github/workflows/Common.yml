@@ -38,7 +38,7 @@ jobs:
         id : check_ci
         uses :  LASER-Yi/workflow-status@v0.1.0
         with :
-          token : ${{ secrets.PRIVATE_TOKEN }}
+          token : ${{ secrets.GITHUB_TOKEN }}
           workflow : ${{ matrix.modules }}.yml
           event : push
           branch : alpha

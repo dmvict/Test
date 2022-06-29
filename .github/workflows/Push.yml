@@ -47,7 +47,7 @@ jobs :
       result: ${{ steps.result.outputs.result }}
     runs-on : ubuntu-latest
     steps :
-      - if: ${{ matrix.modules == 'module1' }}
+      - if: ${{ matrix.modules == 'module2' }}
         run: sleep 5
       - id: result
         run: echo "::set-output name=result::${{ matrix.modules }}"

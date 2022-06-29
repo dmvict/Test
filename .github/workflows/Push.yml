@@ -52,7 +52,7 @@ jobs :
       - if: ${{ matrix.modules == 'failure' }}
         run: exit 1
       - id: result
-        run: echo "::set-output name=result::success"
+        run: echo "::set-output name=result::some"
 
   on_success:
     needs: fast

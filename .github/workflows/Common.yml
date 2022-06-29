@@ -31,7 +31,7 @@ jobs:
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ env.INPUT_W }}
+          workflows : ${{ env.INPUT_B }}
 
   check :
     needs : wait_for_modules

@@ -23,7 +23,7 @@ jobs:
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ join( fromJson( inputs.modules ), '\n' ) }}
+          workflows : ${{ join( fromJson( inputs.modules ), ' ' ) }}
 
   check :
     needs : wait_for_modules

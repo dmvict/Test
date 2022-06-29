@@ -46,5 +46,5 @@ jobs :
     runs-on : ubuntu-latest
     steps :
       - name : Conditional
-        if: ${{ matrix.modules == module1 }}
+        if: ${{ matrix.modules == 'module1' }}
         run: echo module1

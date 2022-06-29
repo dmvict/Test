@@ -42,9 +42,8 @@ jobs :
       matrix :
         modules :
           - success
-          - module1
-          - module2
-          - module3
+          - module
+          - failure
     outputs:
       result: ${{ steps.result.outputs.result }}
     runs-on : ubuntu-latest
@@ -52,7 +51,7 @@ jobs :
       - if: ${{ matrix.modules == 'failure' }}
         run: exit 1
       - id: result
-        run: echo "::set-output name=result::some"
+        run: echo "::set-output name=result::success"
 
   on_success:
     needs: fast

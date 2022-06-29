@@ -1,5 +1,5 @@
 
-name: Delete
+name : runs_clean
 
 on :
   workflow_dispatch :

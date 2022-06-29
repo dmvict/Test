@@ -13,6 +13,6 @@ jobs:
   exp :
     runs-on : ubuntu-latest
     steps :
-      - echo ${{ inputs.matrix }}"
-      - echo "${{ toJson( inputs.matrix ) }}"
+      - echo ${{ github.event.inputs.matrix }}"
+      - echo "${{ toJson( github.event.inputs.matrix ) }}"
 

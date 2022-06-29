@@ -15,23 +15,17 @@ on :
 jobs:
   wait_for_modules :
     runs-on : ubuntu-latest
-    env:
-      INPUT_W : ${{ inputs.modules }}
     steps :
-      - run: echo -e "$INPUT_W"
-      - run: echo -e "${{ inputs.modules }}"
       - run: |
-          v=$(echo $INPUT_W | sed 's/\s/\n/g')
-          export INPUT_B="$v"
-          echo -e "$v"
-      - run: echo "$INPUT_B"
+          modules=$(echo ${{ inputs.modules }} | sed 's/\s/\n/g')
+          export MODULES="$modules"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
         with :
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ env.INPUT_B }}
+          workflows : ${{ env.MODULES }}
 
   check :
     needs : wait_for_modules

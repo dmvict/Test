@@ -20,7 +20,9 @@ jobs:
     steps :
       - run: echo -e "$INPUT_W"
       - run: echo -e "${{ inputs.modules }}"
-      - run: |
+      - name: some
+        id: some
+        run: |
         v=$INPUT_W
         v=$( echo $v | sed 's/\s/\n/g')
         export INPUT_B=$v

@@ -41,15 +41,16 @@ jobs :
     strategy :
       matrix :
         modules :
+          - success
           - module1
           - module2
+          - module3
     outputs:
       result: ${{ steps.result.outputs.result }}
     runs-on : ubuntu-latest
     steps :
-      - if: ${{ matrix.modules == 'module2' }}
-        run: sleep 5
-      - id: result
+      - if : ${{ steps.result.outputs.result != 'success' }}
+        id: result
         run: echo "::set-output name=result::${{ matrix.modules }}"
 
   second:

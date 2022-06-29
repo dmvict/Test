@@ -55,6 +55,6 @@ jobs :
           OUTPUT=$(echo -e "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
           echo "::set-output name=files::$OUTPUT"
       - run: echo ${{ steps.workflow_files.outputs.files }}
-      - run: echo "${{ format( '{1}', some ) }}"
+      - run: echo "${{ format( '{1}', 'some' ) }}"
       # - run: echo ${{ format( '{ "modules" : {1} }', ${{ steps.workflow_files.outputs.files }} ) }}
       # - run: echo "${{ fromJson( '{ "modules : ${{ steps.workflow_files.outputs.files }} }' ) }}"

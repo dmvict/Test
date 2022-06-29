@@ -52,10 +52,10 @@ jobs :
             NAMES="$NAMES $NAME"
           done;
           NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
-          OUTPUT=$(echo -e "$NAMES" | jq -R '[.]' | jq -s -c 'add')
+          OUTPUT=$(echo -e "$NAMES" | jq -R -s -c 'split("\n")[1:]')
           echo "::set-output name=files::$OUTPUT"
-          echo -e "::set-output name=files2::$NAMES"
+          echo -e "::set-output name=files2::"$NAMES""
           echo "::set-output name=files3::"$NAMES""
-      - run: echo ${{ steps.workflow_files.outputs.files }}
-      - run: echo ${{ steps.workflow_files.outputs.files2 }}
-      - run: echo ${{ steps.workflow_files.outputs.files3 }}
+      - run: echo -e "${{ steps.workflow_files.outputs.files }}"
+      - run: echo -e "${{ steps.workflow_files.outputs.files2 }}"
+      - run: echo -e "${{ steps.workflow_files.outputs.files3 }}"

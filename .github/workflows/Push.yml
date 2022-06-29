@@ -54,8 +54,5 @@ jobs :
           NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
           OUTPUT=$(echo -e "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
           echo "::set-output name=files::$OUTPUT"
-          echo -e "::set-output name=files2::"$NAMES""
-          echo "::set-output name=files3::"$NAMES""
-      - run: echo -e "${{ steps.workflow_files.outputs.files }}"
-      - run: echo -e "${{ steps.workflow_files.outputs.files2 }}"
-      - run: echo -e "${{ steps.workflow_files.outputs.files3 }}"
+      - run: echo '{ "modules : ${{ steps.workflow_files.outputs.files }} }'
+      - run: echo "${{ fromJson( '{ "modules : ${{ steps.workflow_files.outputs.files }} }' ) }}"

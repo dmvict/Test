@@ -6,7 +6,6 @@ on:
       repo :
         description : 'repo name.'
         required : true
-        type : string
       days :
         description : 'Older than number of days.'
         required : true
@@ -20,12 +19,10 @@ on:
       save :
         description : 'Conclusion.'
         required : true
-        type : string
         default : cancelled
       branch :
         description : 'Branch.'
         required : true
-        type : string
         default : master
 
 jobs:

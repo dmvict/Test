@@ -23,9 +23,11 @@ jobs:
       - run: echo -e "$INPUT_W"
       - run: echo -e "${{ inputs.modules }}"
       - name: some
+        env:
+          INPUT_W : ${{ env.INPUT_W }}
         id: some
         run: |
-        v=$( echo $INPUT_W | sed 's/\s/\n/g')
+        v=$(echo $INPUT_W | sed 's/\s/\n/g')
         export INPUT_B=$v
         echo -e "$v"
       - run: echo "$INPUT_B"

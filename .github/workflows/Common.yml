@@ -21,7 +21,7 @@ jobs:
       - run: echo -e "$INPUT_W"
       - run: echo -e "${{ inputs.modules }}"
       - run: |
-        val=$(echo $INPUT_W | sed 's/\s/\n/g')
+        val=$(sed 's/\s/\n/g' <<< $INPUT_W)
         export INPUT_B=$val
         echo -e "$val"
       - run: echo "$INPUT_B"

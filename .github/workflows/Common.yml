@@ -22,7 +22,7 @@ jobs:
       - run: echo -e "${{ inputs.modules }}"
       - run: |
           v=$(echo $INPUT_W | sed 's/\s/\n/g')
-          export INPUT_B=$v
+          export INPUT_B="$v"
           echo -e "$v"
       - run: echo "$INPUT_B"
       - name : Waiting ...

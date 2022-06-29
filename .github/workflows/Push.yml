@@ -49,3 +49,5 @@ jobs :
       #   if: ${{ matrix.modules == 'module1' }}
       #   run: echo module1
       - run : gh pr view 45 --json id --jq .id
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

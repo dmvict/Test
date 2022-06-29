@@ -16,16 +16,18 @@ jobs:
   wait_for_modules :
     runs-on : ubuntu-latest
     steps :
-      - run: |
+      - id: modules
+        run: |
           modules=$(echo ${{ inputs.modules }} | sed 's/\s/\n/g')
           export MODULES="$modules"
+          echo "::set-output name=MODULES::"$modules""
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
         with :
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ env.MODULES }}
+          workflows : ${{ steps.modules.outputs.modules }}
 
   check :
     needs : wait_for_modules

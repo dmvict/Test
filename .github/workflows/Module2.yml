@@ -1,0 +1,9 @@
+name : module2
+
+on: push
+
+jobs :
+  runs-on: ubuntu-latest
+  steps:
+    - run: sleep 10
+    - run: echo module2

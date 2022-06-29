@@ -10,12 +10,42 @@ on :
         type : string
 
 jobs:
-  exp :
+  wait_for_modules :
     runs-on : ubuntu-latest
-    strategy:
-      matrix : ${{ fromJson( inputs.matrix ) }}
     steps :
-      - run: echo ${{ matrix.modules }}
-      - run: echo -e ${{ join( fromJson( inputs.matrix ).modules, '\n' )}}
-      - run: echo -e ${{ join( fromJson( inputs.matrix ).modules, '\\n' )}}
+      - name : Waiting ...
+        uses : willgarcia/workflow-wait-action@main
+        with :
+          timeout : 21600
+          interval : 10
+          initial_delay : 30
+          workflows : ${{ join( inputs.modules, '\\n' ) }}
+
+  check :
+    needs : wait_for_modules
+    strategy :
+      matrix : ${{ fromJson( inputs.matrix ) }}
+    outputs :
+      has_succeeded_runs : ${{ steps.success.outputs.success }}
+    runs-on : ubuntu-latest
+    steps :
+      - run: echo "${{ inputs.matrix }}"
+      - name : Check workflow run status
+        id : check_ci
+        uses :  LASER-Yi/workflow-status@v0.1.0
+        with :
+          token : ${{ secrets.PRIVATE_GITHUB_TOKEN }}
+          workflow : ${{ matrix.modules }}.yml
+          event : push
+          branch : alpha
+      - name : Check failure conclusion
+        if : ${{ steps.check_ci.outputs.conclusion == 'failure' }}
+        run : exit 1
+      - name : Check cancelled conclusion
+        if : ${{ steps.check_ci.outputs.conclusion == 'cancelled' }}
+        run : exit 1
+      - name : Check success conclusion and setup output
+        if : ${{ steps.check_ci.outputs.conclusion == 'success' }}
+        id : success
+        run: echo "::set-output name=success::true"
 

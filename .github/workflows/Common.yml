@@ -12,7 +12,8 @@ on :
 jobs:
   exp :
     runs-on : ubuntu-latest
+    strategy:
+      matrix : ${{ fromJson( inputs.matrix ) }}
     steps :
-      - run: echo ${{ inputs.matrix }}
-      - run: echo "${{ toJson( inputs.matrix ) }}"
+      - run: echo ${{ matrix.modules }}
 

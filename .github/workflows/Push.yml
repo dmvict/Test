@@ -49,14 +49,14 @@ jobs :
       result: ${{ steps.result.outputs.result }}
     runs-on : ubuntu-latest
     steps :
-      - if: ${{ !startsWith( matrix.modules, 'success' )}}
-        run: sleep 5
-      - if : ${{ steps.result.outputs.result != 'success' }}
-        id: result
-        run: echo "::set-output name=result::${{ matrix.modules }}"
+      - if: ${{ matrix.modules == 'failure' }}
+        run: exit 1
+      - id: result
+        run: echo "::set-output name=result::success"
 
-  second:
+  on_success:
     needs: fast
+    if: ${{ success() && needs.fast.outputs.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ toJson( needs ) }}"

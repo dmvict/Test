@@ -16,14 +16,14 @@ jobs:
   wait_for_modules :
     runs-on : ubuntu-latest
     steps :
-      - run: echo "${{ join( inputs.modules, '\\n' ) }}"
+      - run: echo "${{ join( fromJson( inputs.modules ), '\\n' ) }}"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
         with :
           timeout : 21600
           interval : 10
           initial_delay : 30
-          workflows : ${{ join( inputs.modules, '\\n' ) }}
+          workflows : ${{ join( fromJson( inputs.modules ), '\\n' ) }}
 
   check :
     needs : wait_for_modules

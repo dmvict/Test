@@ -56,5 +56,6 @@ jobs :
           echo "::set-output name=files::$OUTPUT"
       - run: echo ${{ steps.workflow_files.outputs.files }}
       - run: echo ${{ format( '{0}', ${{ steps.workflow_files.outputs.files }} ) }}
+      - run: echo "${{ join( 'abc cab', '\n' ) }}"
       # - run: echo ${{ format( '{ "modules" : {1} }', ${{ steps.workflow_files.outputs.files }} ) }}
       # - run: echo "${{ fromJson( '{ "modules : ${{ steps.workflow_files.outputs.files }} }' ) }}"

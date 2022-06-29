@@ -19,9 +19,9 @@ jobs:
       - id: modules
         uses: frabert/replace-string-action@v2.0
         with:
-          pattern: '(\w+)\s+(\w+)'
+          pattern: '(\\w+)\\s+(\\w+)'
           string: ${{ inputs.modules }}
-          replace-with: '$1\\n$2'
+          replace-with: '$1\n$2'
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
         with :

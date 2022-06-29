@@ -1,6 +1,7 @@
 
 name: Delete
-on:
+
+on :
   workflow_dispatch :
     inputs :
       repo :

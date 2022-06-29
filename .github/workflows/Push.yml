@@ -45,6 +45,7 @@ jobs :
           - module2
     runs-on : ubuntu-latest
     steps :
-      - name : Conditional
-        if: ${{ matrix.modules == 'module1' }}
-        run: echo module1
+      # - name : Conditional
+      #   if: ${{ matrix.modules == 'module1' }}
+      #   run: echo module1
+      - run : gh pr view 45 --json id --jq .id

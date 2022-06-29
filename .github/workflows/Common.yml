@@ -22,7 +22,7 @@ jobs:
         with :
           timeout : 21600
           interval : 10
-          initial_delay : 30
+          initial_delay : 10
           workflows : ${{ join( fromJson( inputs.modules ), '\\n' ) }}
 
   check :

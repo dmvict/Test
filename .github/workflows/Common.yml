@@ -8,6 +8,9 @@ on :
       matrix :
         required : true
         type : string
+      modules :
+        required : true
+        type : string
 
 jobs:
   wait_for_modules :

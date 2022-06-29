@@ -11,8 +11,6 @@ on :
       modules :
         required : true
         type : string
-env:
-  INPUT_W : ${{ inputs.modules }}
 
 jobs:
   wait_for_modules :
@@ -22,11 +20,7 @@ jobs:
     steps :
       - run: echo -e "$INPUT_W"
       - run: echo -e "${{ inputs.modules }}"
-      - name: some
-        env:
-          INPUT_W : ${{ env.INPUT_W }}
-        id: some
-        run: |
+      - run: |
           v=$(echo $INPUT_W | sed 's/\s/\n/g')
           export INPUT_B=$v
           echo -e "$v"
@@ -37,7 +31,7 @@ jobs:
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ env.$INPUT_W }}
+          workflows : ${{ env.INPUT_W }}
 
   check :
     needs : wait_for_modules

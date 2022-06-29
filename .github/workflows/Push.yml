@@ -47,6 +47,8 @@ jobs :
       result: ${{ steps.result.outputs.result }}
     runs-on : ubuntu-latest
     steps :
+      - if: ${{ matrix.modules == 'module1' }}
+        run: sleep 5
       - id: result
         run: echo "::set-output name=result::${{ matrix.modules }}"
 
@@ -54,4 +56,4 @@ jobs :
     needs: fast
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ toJson( needs ) }}
+      - run: echo "${{ toJson( needs ) }}"

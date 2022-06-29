@@ -38,12 +38,14 @@ jobs :
   #     - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}
 
   fast:
+    strategy :
+      matrix :
+        modules :
+          - module1
+          - module2
     runs-on : ubuntu-latest
     steps :
-      - run: echo ${{ '12.9.1' > '14.x' }}
-      - run: echo ${{ '14.x' > '16.x' }}
-      - run: echo ${{ '16.x' > '18.x' }}
-      - run: echo ${{ '12.9.1' < '14.x' }}
-      - run: echo ${{ '14.x' < '16.x' }}
-      - run: echo ${{ '16.x' < '18.x' }}
+      - name : Conditional
+        if: ${{ matrix.modules == module1 }}
+        run: echo module1
 

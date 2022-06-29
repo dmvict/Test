@@ -5,38 +5,39 @@ on :
   workflow_dispatch :
     inputs :
       repo :
-        description : 'repo name.'
+        description : 'repo'
         required : true
-      days :
-        description : 'Older than number of days.'
-        required : true
-        type : number
-        default : 0
-      save :
-        description : 'Save min runs.'
-        required : true
-        type : number
-        default : 0
-      save :
-        description : 'Conclusion.'
-        required : true
-        default : cancelled
-      branch :
-        description : 'Branch.'
-        required : true
-        default : master
+      # days :
+      #   description : 'Older than number of days.'
+      #   required : true
+      #   type : number
+      #   default : 0
+      # save :
+      #   description : 'Save min runs.'
+      #   required : true
+      #   type : number
+      #   default : 0
+      # save :
+      #   description : 'Conclusion.'
+      #   required : true
+      #   default : cancelled
+      # branch :
+      #   description : 'Branch.'
+      #   required : true
+      #   default : master
 
 jobs:
   delete_runs:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete workflow runs
-        uses: dmvict/clean-workflow-runs@v1
-        with:
-          token: ${{ secrets.PRIVATE_TOKEN }}
-          repo: dmvict/wTools
-          branch : ${{ github.event.inputs.branch }}
-          run_conclusions: ${{ github.event.inputs.conclusion }}
-          save_period: ${{ github.event.inputs.days }}
-          save_min_runs_number: ${{ github.event.inputs.days }}
+      - run : echo hello
+      # - name: Delete workflow runs
+      #   uses: dmvict/clean-workflow-runs@v1
+      #   with:
+      #     token: ${{ secrets.PRIVATE_TOKEN }}
+      #     repo: dmvict/wTools
+      #     branch : ${{ github.event.inputs.branch }}
+      #     run_conclusions: ${{ github.event.inputs.conclusion }}
+      #     save_period: ${{ github.event.inputs.days }}
+      #     save_min_runs_number: ${{ github.event.inputs.days }}
 

@@ -62,8 +62,8 @@ jobs :
             NAMES="$NAMES $NAME"
           done;
           NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
-          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
-          echo "::set-output name=names::$OUTPUT"
+          # OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
+          echo "::set-output name=names::"$NAMES""
 
   test :
     needs : get

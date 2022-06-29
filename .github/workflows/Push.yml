@@ -38,24 +38,8 @@ jobs :
   #     - run: /usr/bin/docker inspect ${{ steps.id.outputs.id }}
 
   fast:
-    strategy :
-      matrix :
-        modules :
-          - success
-          - module
-          - failure
-    outputs:
-      result: ${{ steps.result.outputs.result }}
     runs-on : ubuntu-latest
     steps :
-      - if: ${{ matrix.modules == 'failure' }}
-        run: exit 1
-      - id: result
-        run: echo "::set-output name=result::success"
-
-  on_success:
-    needs: fast
-    if: ${{ success() && needs.fast.outputs.result == 'success' }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ toJson( needs ) }}"
+      - uses : actions/checkout@v2
+      - run: ls .github/workflows
+      - run: ls .github/workflows | grep Module

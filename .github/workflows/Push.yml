@@ -58,4 +58,4 @@ jobs :
     needs: fast
     runs-on: ubuntu-latest
     steps:
-      - echo ${{ toJson( needs.fast.outputs ) }}
+      - echo ${{ toJson( needs ) }}

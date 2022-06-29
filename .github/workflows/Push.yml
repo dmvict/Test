@@ -58,4 +58,5 @@ jobs :
     needs: fast
     runs-on: ubuntu-latest
     steps:
-      - echo ${{ toJson( needs ) }}
+      - echo hello
+      # - echo ${{ toJson( needs ) }}

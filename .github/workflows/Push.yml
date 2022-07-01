@@ -3,10 +3,6 @@ name: push
 
 on: [ push ]
 
-env:
-  abc: cab
-  some: two
-
 jobs:
 
   contexts:
@@ -21,9 +17,7 @@ jobs:
       - run: echo "${{ toJSON( steps.output ) }}"
       - run: echo -e "${{ toJSON( steps.output.outputs.var ) }}"
       - run: echo -e "${{ toJSON( steps.output.outputs.var2 ) }}"
-      - env:
-          some: hello
-        run: echo "${{ toJSON( env ) }}"
+      - run: echo "${{ toJSON( env ) }}"
 
   # get:
   #   outputs :

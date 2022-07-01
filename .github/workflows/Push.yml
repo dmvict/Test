@@ -3,6 +3,10 @@ name: push
 
 on: [ push ]
 
+env:
+  abc: cab
+  some: two
+
 jobs:
 
   contexts:

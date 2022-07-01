@@ -3,6 +3,9 @@ name: push
 
 on: [ push ]
 
+env:
+  some : abc
+
 jobs:
 
   contexts:

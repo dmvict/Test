@@ -11,21 +11,7 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      # - id: output
-      #   run: |
-      #     v=$(echo -e 'a\nb')
-      #     echo -e "$v"
-      #     echo "::set-output name=var::"$v""
-      #     echo "::set-output name=var2::$v"
-      # - run: echo "${{ toJSON( steps.output ) }}"
-      # - run: echo -e "${{ toJSON( steps.output.outputs.var ) }}"
-      # - run: echo -e "${{ toJSON( steps.output.outputs.var2 ) }}"
-      # - run: echo "${{ toJSON( env ) }}"
-      - uses: dmvict/wretry.action@exp
-        with:
-          action: actions/hello-world-docker-action@main
-          with: |
-            who-to-greet: user
+      - run: tree ../
 
   # get:
   #   outputs :

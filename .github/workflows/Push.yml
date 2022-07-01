@@ -18,9 +18,11 @@ jobs:
       # - run: echo -e "${{ toJSON( steps.output.outputs.var ) }}"
       # - run: echo -e "${{ toJSON( steps.output.outputs.var2 ) }}"
       # - run: echo "${{ toJSON( env ) }}"
-      - uses: actions/hello-world-docker-action@main
+      - uses: dmvict/wretry.action@exp
         with:
-          who-to-greet: user
+          action: actions/hello-world-docker-action@main
+          with: |
+            who-to-greet: user
 
   # get:
   #   outputs :

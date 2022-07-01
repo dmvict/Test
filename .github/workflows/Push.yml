@@ -29,8 +29,8 @@ jobs:
             NAME=$(cat .github/workflows/$WORKFLOW | grep -G '^name :' | sed 's/name\s*:\s\+\(\S*\)/\1/')
             NAMES="$NAMES $NAME"
           done;
-          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
-          echo "::set-output name=names::"$NAMES""
+          NAMES=$(sed 's/\s\+/%0A/g' <<< $NAMES)
+          echo "::set-output name=names::$NAMES"
 
   test :
     needs : get

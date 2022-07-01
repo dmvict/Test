@@ -16,12 +16,6 @@ jobs:
   wait_for_modules :
     runs-on : ubuntu-latest
     steps :
-      - id: modules
-        run : |
-          v=$(echo ${{ inputs.modules }} | sed 's/\s\+/%0A/g')
-          echo "::set-output name=replaced::$v"
-          v2=$(echo ${{ inputs.modules }} | sed 's/\s\+/%0D/g')
-          echo "::set-output name=replaced2::$v2"
       - run : echo "${{ toJSON( steps.modules )}}"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
@@ -29,7 +23,7 @@ jobs:
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ steps.modules.outputs.replaced }}
+          workflows : ${{ inputs.modules }}
 
   check :
     needs : wait_for_modules

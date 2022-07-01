@@ -18,7 +18,7 @@ jobs:
       # - run: echo -e "${{ toJSON( steps.output.outputs.var ) }}"
       # - run: echo -e "${{ toJSON( steps.output.outputs.var2 ) }}"
       # - run: echo "${{ toJSON( env ) }}"
-      - uses: dmvict/wretry.action@context
+      - uses: dmvict/wretry.action@exp
         with:
           action: actions/hello-world-docker-action@main
           with: |

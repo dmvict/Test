@@ -17,11 +17,9 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       - id: modules
-        uses: frabert/replace-string-action@v2.0
-        with:
-          pattern: '(\\w+)\\s+(\\w+)'
-          string: ${{ inputs.modules }}
-          replace-with: '$1\n$2'
+        run : |
+          v=$(echo ${{ inputs.module }} | sed 's/\s/\r/')
+          echo "::set-output name=replaced::$v"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
         with :

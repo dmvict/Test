@@ -11,7 +11,7 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      - run: cat ../../_temp/*
+      - run: cat ../../_temp/*.sh
 
   # get:
   #   outputs :

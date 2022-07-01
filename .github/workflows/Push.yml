@@ -14,6 +14,9 @@ jobs:
       - id : multiline
         run : |
           echo "::set-output name=var::a%0Dn"
+      - run : echo ${{ steps.multiline.outputs.var }}
+      - run : echo "${{ steps.multiline.outputs.var }}"
+      - run : echo -e "${{ steps.multiline.outputs.var }}"
 
 
   # get:

@@ -5,6 +5,7 @@ on: [ push ]
 
 env:
   some : abc
+  val : abc
 
 jobs:
 
@@ -12,8 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: dmvict/test.action@exp
+        env:
+          another: 2
+          bool: true
+          val: val
         with:
-          command: node -v
+          action: actions/hello-world-docker-action@main
 
 
   # get:

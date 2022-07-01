@@ -18,7 +18,7 @@ jobs:
     steps :
       - id: modules
         run : |
-          v=$(echo ${{ inputs.module }} | sed 's/\s/\r/')
+          v=$(echo ${{ inputs.module }} | sed 's/\s\+/%0A/g')
           echo "::set-output name=replaced::$v"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main

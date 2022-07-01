@@ -1,33 +1,25 @@
 
-name : push
+name: push
 
-on : [ push ]
+on: [ push ]
 
-jobs :
+jobs:
 
-  with :
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        ports:
-          # Maps TCP port 5432 in the service container to a randomly chosen available port on the host.
-          - 5432
-    runs-on : ubuntu-latest
-    steps :
-      - run: echo ${{ job.id }}
-      - run: echo "${{ toJSON( job ) }}"
-      - uses : dmvict/test.action@exp
-
-  without :
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
-    runs-on : ${{ matrix.os }}
-    steps :
-      - uses : dmvict/test.action@exp
+  contexts:
+    runs-on: ubuntu-latest
+    steps:
+      - id: output
+        run: |
+          v=$(echo -e 'a\nb')
+          echo -e "$v"
+          echo "::set-output name=var::"$v""
+          echo "::set-output name=var2::$v"
+      - run: echo "${{ toJSON( steps.output ) }}"
+      - run: echo -e "${{ toJSON( steps.output.outputs.var ) }}"
+      - run: echo -e "${{ toJSON( steps.output.outputs.var2 ) }}"
+      - env:
+          some: hello
+        run: echo ${{ toJSON( env ) }}
 
   # get:
   #   outputs :

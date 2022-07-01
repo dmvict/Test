@@ -11,8 +11,7 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      - run: cat $GITHUB_ENV
-      - run: cat ${{ env.GITHUB_ENV }}
+      - run: ${{ env.GITHUB_ENV }}
 
 
   # get:

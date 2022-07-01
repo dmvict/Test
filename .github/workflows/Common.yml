@@ -20,13 +20,16 @@ jobs:
         run : |
           v=$(echo ${{ inputs.module }} | sed 's/\s\+/%0A/g')
           echo "::set-output name=replaced::$v"
+          v2=$(echo ${{ inputs.module }} | sed 's/\s\+/%0D/g')
+          echo "::set-output name=replaced2::$v2"
+      - run : echo "${{ toJSON( steps.modules )}}"
       - name : Waiting ...
         uses : willgarcia/workflow-wait-action@main
         with :
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ steps.modules.outputs.replaced }}
+          workflows : ${{ steps.modules.outputs.replaced2 }}
 
   check :
     needs : wait_for_modules

@@ -11,7 +11,7 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      - run: cat ../../_PipelineMapping/dmvict/Test/PipelineFolder.json
+      - run: cat ../../../runners/*/*.sh
 
   # get:
   #   outputs :

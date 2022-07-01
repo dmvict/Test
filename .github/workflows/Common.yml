@@ -18,9 +18,9 @@ jobs:
     steps :
       - id: modules
         run : |
-          v=$(echo ${{ inputs.module }} | sed 's/\s\+/%0A/g')
+          v=$(echo ${{ inputs.modules }} | sed 's/\s\+/%0A/g')
           echo "::set-output name=replaced::$v"
-          v2=$(echo ${{ inputs.module }} | sed 's/\s\+/%0D/g')
+          v2=$(echo ${{ inputs.modules }} | sed 's/\s\+/%0D/g')
           echo "::set-output name=replaced2::$v2"
       - run : echo "${{ toJSON( steps.modules )}}"
       - name : Waiting ...
@@ -29,7 +29,7 @@ jobs:
           timeout : 21600
           interval : 10
           initial_delay : 10
-          workflows : ${{ steps.modules.outputs.replaced2 }}
+          workflows : ${{ steps.modules.outputs.replaced }}
 
   check :
     needs : wait_for_modules

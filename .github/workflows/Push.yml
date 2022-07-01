@@ -17,6 +17,7 @@ jobs:
       - run : echo ${{ steps.multiline.outputs.var }}
       - run : echo "${{ steps.multiline.outputs.var }}"
       - run : echo -e "${{ steps.multiline.outputs.var }}"
+      - run : echo -e "${{ toJSON(steps.multiline) }}"
 
 
   # get:

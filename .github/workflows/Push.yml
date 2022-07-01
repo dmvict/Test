@@ -19,7 +19,7 @@ jobs:
       - run: echo -e "${{ toJSON( steps.output.outputs.var2 ) }}"
       - env:
           some: hello
-        run: echo ${{ toJSON( env ) }}
+        run: echo "${{ toJSON( env ) }}"
 
   # get:
   #   outputs :

@@ -11,7 +11,7 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      - run: tree -a ../../..
+      - run: cat ../../_temp/_runner_file_commands/*
 
   # get:
   #   outputs :

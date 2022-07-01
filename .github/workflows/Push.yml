@@ -11,7 +11,9 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo cat ${{ env.GITHUB_ENV }}
+      - uses: dmvict/test.action@exp
+        with:
+          command: node -v
 
 
   # get:

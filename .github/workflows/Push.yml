@@ -11,13 +11,8 @@ jobs:
   contexts:
     runs-on: ubuntu-latest
     steps:
-      - id : multiline
-        run : |
-          echo "::set-output name=var::a%0Dn"
-      - run : echo ${{ steps.multiline.outputs.var }}
-      - run : echo "${{ steps.multiline.outputs.var }}"
-      - run : echo -e "${{ steps.multiline.outputs.var }}"
-      - run : echo -e "${{ toJSON(steps.multiline) }}"
+      - run: cat $GITHUB_ENV
+      - run: cat ${{ env.GITHUB_ENV }}
 
 
   # get:

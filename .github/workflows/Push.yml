@@ -3,22 +3,19 @@ name: push
 
 on: [ push ]
 
-env:
-  some : abc
-  val : abc
-
 jobs:
 
-  contexts:
+  pre:
     runs-on: ubuntu-latest
     steps:
       - uses: dmvict/test.action@exp
-        env:
-          another: 2
-          bool: true
-          val: val
+
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dmvict/test.action@exp
         with:
-          action: actions/hello-world-docker-action@main
+          pre: false
 
 
   # get:

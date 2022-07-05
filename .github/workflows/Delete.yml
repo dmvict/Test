@@ -36,7 +36,7 @@ jobs:
           token: ${{ secrets.PRIVATE_TOKEN }}
           repo: dmvict/${{ inputs.repo }}
           branch : ${{ inputs.branch }}
-          # run_conclusions: ${{ github.event.inputs.conclusion }}
+          workflow_id : ${{ inputs.workflow_id }}
           save_period: ${{ inputs.days }}
           save_min_runs_number: ${{ inputs.days }}
 

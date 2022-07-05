@@ -23,8 +23,8 @@ on :
         default : ""
       branch :
         description : 'Branch.'
-        required : true
-        default : master
+        required : false
+        default : ""
 
 jobs:
   delete_runs:

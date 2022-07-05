@@ -6,6 +6,7 @@ on : [ pull_request ]
 jobs :
 
   fast:
+    if: ${{ github.repository == 'Wandalen/exp' }}
     runs-on : ubuntu-latest
     steps :
       - run: exit 1

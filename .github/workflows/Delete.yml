@@ -17,10 +17,10 @@ on :
         required : true
         type : number
         default : 0
-      # conclusion :
-      #   description : 'Conclusion.'
-      #   required : true
-      #   default : ""
+      workflow_id :
+        description : 'Workflow id or filename.'
+        required : false
+        default : ""
       branch :
         description : 'Branch.'
         required : true

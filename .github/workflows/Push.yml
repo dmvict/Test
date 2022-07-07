@@ -5,17 +5,12 @@ on: [ push ]
 
 jobs:
 
-  pre:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: dmvict/test.action@exp
-
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: dmvict/test.action@exp
+      - uses: dmvict/wretry.action@exp
         with:
-          pre: false
+          action: dmvict/test.action
 
 
   # get:

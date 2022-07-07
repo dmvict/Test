@@ -8,8 +8,8 @@ jobs:
   main:
     strategy:
       matrix:
-        v: [ 12.x ]
-    runs-on: ubuntu-latest
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: dmvict/wretry.action@exp
         with:

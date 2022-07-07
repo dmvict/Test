@@ -12,6 +12,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: dmvict/wretry.action@exp
+        env:
+          foo: bar
         with:
           action: dmvict/test.action
 

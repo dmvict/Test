@@ -6,6 +6,9 @@ on: [ push ]
 jobs:
 
   main:
+    strategy:
+      matrix:
+        v: [ 12.x ]
     runs-on: ubuntu-latest
     steps:
       - uses: dmvict/wretry.action@exp

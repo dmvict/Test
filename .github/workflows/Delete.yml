@@ -25,6 +25,10 @@ on :
         description : 'Branch.'
         required : false
         default : ""
+      run_conclusions :
+        description : 'Run conclusions.'
+        required : false
+        default : ""
 
 jobs:
   delete_runs:
@@ -36,6 +40,7 @@ jobs:
           token: ${{ secrets.PRIVATE_TOKEN }}
           repo: dmvict/${{ inputs.repo }}
           branch : ${{ inputs.branch }}
+          run_conclusions : ${{ inputs.run_conclusions }}
           workflow_id : ${{ inputs.workflow_id }}
           save_period: ${{ inputs.days }}
           save_min_runs_number: ${{ inputs.save }}

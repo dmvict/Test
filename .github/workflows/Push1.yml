@@ -1,0 +1,19 @@
+
+name : push1
+
+on :
+  push :
+    branches : [ alpha ]
+
+jobs:
+  success :
+    if : "startsWith( github.event.head_commit.message, 'success' )"
+    runs-on : ubuntu-latest
+    steps :
+      - run : exit 0
+
+  failure :
+    if : "startsWith( github.event.head_commit.message, 'failure' )"
+    runs-on : ubuntu-latest
+    steps :
+      - run : exit 1

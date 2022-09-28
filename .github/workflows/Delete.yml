@@ -44,4 +44,3 @@ jobs:
           workflow_id : ${{ inputs.workflow_id }}
           save_period: ${{ inputs.days }}
           save_min_runs_number: ${{ inputs.save }}
-

@@ -1,0 +1,32 @@
+name : exp
+
+on :
+  push :
+    branches : [ master ]
+
+jobs:
+  success :
+    runs-on : ubuntu-latest
+    steps :
+      - uses : dmvict/wretry.action@fix
+        with:
+          action: dmvict/test.action@multiline_option
+          with: |
+            multiline: |
+              one
+              two
+            string: |
+          attempt_limit: 3
+          attempt_delay: 2000
+  failure :
+    runs-on : ubuntu-latest
+    steps :
+      - uses : dmvict/wretry.action@fix
+        with:
+          action: dmvict/test.action@multiline_option
+          with: |
+            multiline: |
+              one
+            string: |
+          attempt_limit: 3
+          attempt_delay: 2000

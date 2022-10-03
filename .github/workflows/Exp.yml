@@ -8,7 +8,7 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses : dmvict/wretry.action@fix
+      - uses : dmvict/wretry.action@js_action
         with:
           action: dmvict/test.action@multiline_option
           with: |
@@ -21,12 +21,13 @@ jobs:
   failure :
     runs-on : ubuntu-latest
     steps :
-      - uses : dmvict/wretry.action@fix
+      - uses : Wandalen/wretry.action@js_action
         with:
           action: dmvict/test.action@multiline_option
           with: |
             multiline: |
               one
+              two
             string: |
           attempt_limit: 3
           attempt_delay: 2000

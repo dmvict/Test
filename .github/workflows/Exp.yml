@@ -3,31 +3,25 @@ name : exp
 on :
   push :
     branches : [ master ]
+    tags: '**'
 
 jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses : dmvict/wretry.action@js_action
+      - uses : dmvict/wretry.action@master
         with:
-          action: dmvict/test.action@multiline_option
-          with: |
-            multiline: |
-              one
-              two
-            string: |
-          attempt_limit: 3
-          attempt_delay: 2000
-  failure :
-    runs-on : ubuntu-latest
-    steps :
-      - uses : Wandalen/wretry.action@js_action
-        with:
-          action: dmvict/test.action@multiline_option
-          with: |
-            multiline: |
-              one
-              two
-            string: |
-          attempt_limit: 3
-          attempt_delay: 2000
+          command: echo foo
+  # failure :
+  #   runs-on : ubuntu-latest
+  #   steps :
+  #     - uses : Wandalen/wretry.action@js_action
+  #       with:
+  #         action: dmvict/test.action@multiline_option
+  #         with: |
+  #           multiline: |
+  #             one
+  #             two
+  #           string: |
+  #         attempt_limit: 3
+  #         attempt_delay: 2000

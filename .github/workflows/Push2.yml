@@ -17,9 +17,9 @@ jobs:
         uses: Wandalen/wretry.action@master
         with:
           attempt_limit: 3
-          action: dmvict/test.action
+          action: dmvict/test.action@master
       - id: step2
-        uses: dmvict/test.action
+        uses: dmvict/test.action@master
         with:
           any: 3
 

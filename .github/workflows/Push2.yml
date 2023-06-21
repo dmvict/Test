@@ -14,8 +14,8 @@ jobs:
       output2: ${{ steps.step2.outputs.test }}
     steps:
       - id: step
-        env:
-          GITHUB_OUTPUT: ${{ github.output }}
+        # env:
+        #   GITHUB_OUTPUT: ${{ github.output }}
         uses: dmvict/wretry.action@alternative_master
         with:
           attempt_limit: 3

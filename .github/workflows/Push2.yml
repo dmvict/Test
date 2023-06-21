@@ -16,7 +16,7 @@ jobs:
       - id: step
         env:
           GITHUB_OUTPUT: ${{ github.output }}
-        uses: Wandalen/wretry.action@v1.0.36
+        uses: dmvict/wretry.action@alternative_master
         with:
           attempt_limit: 3
           action: dmvict/test.action@master

@@ -1,17 +1,17 @@
-name : exp
-
-on :
-  push :
-    branches : [ master ]
-    tags: '**'
-
-jobs:
-  success :
-    runs-on : ubuntu-latest
-    steps :
-      - uses : dmvict/wretry.action@master
-        with:
-          command: echo foo
+# name : exp
+#
+# on :
+#   push :
+#     branches : [ master ]
+#     tags: '**'
+#
+# jobs:
+#   success :
+#     runs-on : ubuntu-latest
+#     steps :
+#       - uses : dmvict/wretry.action@master
+#         with:
+#           command: echo foo
   # failure :
   #   runs-on : ubuntu-latest
   #   steps :

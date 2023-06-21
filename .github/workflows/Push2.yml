@@ -20,12 +20,12 @@ jobs:
         with:
           attempt_limit: 3
           action: dmvict/test.action@master
-      - id: step2
-        uses: dmvict/test.action@master
-        with:
-          any: 3
-      - run: echo $GITHUB_OUTPUT
-      - run: cat $GITHUB_OUTPUT
+      # - id: step2
+      #   uses: dmvict/test.action@master
+      #   with:
+      #     any: 3
+      # - run: echo $GITHUB_OUTPUT
+      # - run: cat $GITHUB_OUTPUT
 
   job2:
     runs-on: ubuntu-latest

@@ -33,5 +33,5 @@ jobs:
     steps:
       - env:
           OUTPUT1: ${{ fromJSON( needs.job1.outputs.output1 ).test }}
-          OUTPUT2: ${{needs.job1.outputs.output2}}
+          OUTPUT2: ${{needs.job1.outputs.output1}}
         run: echo "$OUTPUT1 $OUTPUT2"

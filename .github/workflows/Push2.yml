@@ -9,25 +9,34 @@ on : push
 jobs:
   job1:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step.outputs.outputs }}
-      output2: ${{ steps.step2.outputs.test }}
+    # outputs:
+    #   output1: ${{ steps.step.outputs.outputs }}
+    #   output2: ${{ steps.step2.outputs.test }}
     steps:
-      - id: step
-        uses: dmvict/wretry.action@alternative_master
-        with:
-          attempt_limit: 3
-          command: echo "test=hello" >> "$GITHUB_OUTPUT"
+      - name: Get default branch
+        id: branch
+        run: |
+          branch=$(curl -s \
+            -H "Authorization: token ${{ secrets.ACCESS_TOKEN }}" \
+            https://api.github.com/repos/firepheonix/${{ github.event.head_commit.message }} | jq --raw-output .default_branch)
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      - run: echo ${{ steps.branch.outputs.branch }}
+
+      # - id: step
+      #   uses: dmvict/wretry.action@alternative_master
+      #   with:
+      #     attempt_limit: 3
+      #     command: echo "test=hello" >> "$GITHUB_OUTPUT"
       # - id: step2
       #   uses: dmvict/test.action@master
       #   with:
       #     any: 3
 
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - env:
-          OUTPUT1: ${{ fromJSON( needs.job1.outputs.output1 ).test }}
-          OUTPUT2: ${{needs.job1.outputs.output1}}
-        run: echo "$OUTPUT1 $OUTPUT2"
+  # job2:
+  #   runs-on: ubuntu-latest
+  #   needs: job1
+  #   steps:
+  #     - env:
+  #         OUTPUT1: ${{ fromJSON( needs.job1.outputs.output1 ).test }}
+  #         OUTPUT2: ${{needs.job1.outputs.output1}}
+  #       run: echo "$OUTPUT1 $OUTPUT2"

@@ -8,7 +8,7 @@ on : push
 
 jobs:
   job1:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     # outputs:
     #   output1: ${{ steps.step.outputs.outputs }}
     #   output2: ${{ steps.step2.outputs.test }}
@@ -17,6 +17,7 @@ jobs:
         run: |
           echo $(pwd)
           echo hello
+        shell: bash
       - run: echo ${{ steps.branch.outputs.branch }}
       - id: action
         uses: Wandalen/wretry.action@master

@@ -13,14 +13,18 @@ jobs:
     #   output1: ${{ steps.step.outputs.outputs }}
     #   output2: ${{ steps.step2.outputs.test }}
     steps:
-      - name: Get default branch
-        id: branch
+      - name: command
         run: |
-          branch=$(curl -s \
-            -H "Authorization: token ${{ secrets.ACCESS_TOKEN }}" \
-            https://api.github.com/repos/firepheonix/${{ github.event.head_commit.message }} | jq --raw-output .default_branch)
-          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo $(pwd)
+          echo hello
       - run: echo ${{ steps.branch.outputs.branch }}
+      - id: action
+        uses: Wandalen/wretry.action@master
+        with:
+          attempt_limit: 3
+          command: |
+            echo $(pwd)
+            echo hello
 
       # - id: step
       #   uses: dmvict/wretry.action@alternative_master

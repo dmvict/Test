@@ -229,6 +229,8 @@ actions:
     /opt/certbot/bin/pip install --upgrade pip
     /opt/certbot/bin/pip install certbot certbot-dns-bunny
     ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+    rc-update add nginx default
+    rc-update add haproxy default
 
 - trigger: post-packages
   action: |-

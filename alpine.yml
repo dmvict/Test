@@ -231,6 +231,10 @@ actions:
     ln -s /opt/certbot/bin/certbot /usr/bin/certbot
     rc-update add nginx default
     rc-update add haproxy default
+    adduser -DH -g www www
+    mkdir /www
+    chown -R www:www /var/lib/nginx
+    chown -R www:www /www
 
 - trigger: post-packages
   action: |-

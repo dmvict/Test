@@ -16,15 +16,15 @@ jobs:
       - name: command
         run: |
           echo $(pwd)
-          echo hello
+          echo hello | sha512sum
         shell: bash
-      - id: action
-        uses: Wandalen/wretry.action@master
-        with:
-          attempt_limit: 3
-          command: |
-            echo $(pwd)
-            echo hello
+      # - id: action
+      #   uses: Wandalen/wretry.action@master
+      #   with:
+      #     attempt_limit: 3
+      #     command: |
+      #       echo $(pwd)
+      #       echo hello
 
       # - id: step
       #   uses: dmvict/wretry.action@alternative_master

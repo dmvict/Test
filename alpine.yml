@@ -226,6 +226,7 @@ actions:
     chmod +x /etc/local.d/postgres-custom.start
     echo -en '#!/bin/sh\nsu postgres -c "pg_ctl start -D /var/lib/postgresql/data"' | tee -a /etc/local.d/postgres-custom.start
     rc-update add local default
+    sed -i "s/^\(unix_socket_directories\s*=\s*\).*$/#\1\nunix_socket_directories = '\/tmp'/" /var/lib/postgresql/data/postgresql.conf
 
 - trigger: post-packages
   action: |-

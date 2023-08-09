@@ -224,6 +224,9 @@ actions:
     chmod 0700 /var/lib/postgresql/data/
     lbu add /var/lib/postgresql/data/
     lbu add /var/lib/postgresql/data/.psql_history
+    touch /etc/local.d/postgres-custom.start
+    chmod +x /etc/local.d/postgres-custom.start
+    echo -en '#!/bin/sh\nsu postgres -c "pg_ctl start -D /var/lib/postgresql/data"' | tee -a /etc/local.d/postgres-custom.start
 
 - trigger: post-packages
   action: |-

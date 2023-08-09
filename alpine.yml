@@ -166,15 +166,7 @@ packages:
     - 3.14
 
   - packages:
-    - nginx
-    action: install
-
-  - packages:
-    - haproxy
-    action: install
-
-  - packages:
-    - python3
+    - postgresql
     action: install
 
   - packages:
@@ -225,18 +217,13 @@ actions:
   action: |-
     #!/bin/sh
     set -eux
-    python3 -m venv /opt/certbot/
-    /opt/certbot/bin/pip install --upgrade pip
-    /opt/certbot/bin/pip install certbot certbot-dns-bunny
-    ln -s /opt/certbot/bin/certbot /usr/bin/certbot
-    rc-update add nginx default
-    rc-update add haproxy default
-    adduser -DH -g www www
-    mkdir /www
-    chown -R www:www /var/lib/nginx
-    chown -R www:www /www
-    cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bk
-    cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bk
+    mkdir /var/lib/postgresql/data/
+    chown postgres:postgres /var/lib/postgresql/data/
+    touch /var/lib/postgresql/data/.psql_history
+    chown postgres:postgres /var/lib/postgresql/data/.psql_history
+    chmod 0700 /var/lib/postgresql/data/
+    lbu add /var/lib/postgresql/data/
+    lbu add /var/lib/postgresql/data/.psql_history
 
 - trigger: post-packages
   action: |-
@@ -304,7 +291,6 @@ actions:
   action: |-
     #!/bin/sh
     set -eux
-
     setup-cloud-init
   variants:
   - cloud

@@ -219,14 +219,13 @@ actions:
     set -eux
     mkdir /var/lib/postgresql/data/
     chown postgres:postgres /var/lib/postgresql/data/
-    touch /var/lib/postgresql/data/.psql_history
-    chown postgres:postgres /var/lib/postgresql/data/.psql_history
     chmod 0700 /var/lib/postgresql/data/
-    lbu add /var/lib/postgresql/data/
-    lbu add /var/lib/postgresql/data/.psql_history
+    su postgres -c 'initdb -D /var/lib/postgresql/data'
+
     touch /etc/local.d/postgres-custom.start
     chmod +x /etc/local.d/postgres-custom.start
     echo -en '#!/bin/sh\nsu postgres -c "pg_ctl start -D /var/lib/postgresql/data"' | tee -a /etc/local.d/postgres-custom.start
+    rc-update add local default
 
 - trigger: post-packages
   action: |-

@@ -13,6 +13,8 @@ jobs:
     #   output1: ${{ steps.step.outputs.outputs }}
     #   output2: ${{ steps.step2.outputs.test }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Upload binaries to release tag
         uses: svenstaro/upload-release-action@v2
         with:

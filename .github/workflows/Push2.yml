@@ -13,11 +13,15 @@ jobs:
     #   output1: ${{ steps.step.outputs.outputs }}
     #   output2: ${{ steps.step2.outputs.test }}
     steps:
-      - name: command
-        run: |
-          echo $(pwd)
-          echo hello | sha512sum
-        shell: bash
+      - name: Upload binaries to release tag
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_name: dmvict/Test
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./out/v0.0.4.md
+          asset_name: v0.0.4.md
+          overwrite: true
+          tag: ${{ github.ref == 'master' && 'nightly'-github.ref || 'nightly' }}
       # - id: action
       #   uses: Wandalen/wretry.action@master
       #   with:

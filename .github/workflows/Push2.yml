@@ -8,28 +8,25 @@ on : push
 
 jobs:
   job1:
-    strategy :
-      fail-fast : false
-      matrix :
-        os : [ ubuntu, windows, macos ]
-    runs-on : ${{ matrix.os }}-latest
+    runs-on : ubuntu-latest
     # outputs:
     #   output1: ${{ steps.step.outputs.outputs }}
     #   output2: ${{ steps.step2.outputs.test }}
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-      # - run: echo ${{ github.ref }}
-      - run: date '+%Y-%m-%d'
-      # - name: Upload binaries to release tag
-      #   uses: svenstaro/upload-release-action@v2
-      #   with:
-      #     repo_name: dmvict/Test
-      #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #     file: ./out/v0.0.4.md
-      #     asset_name: v0.0.4.md
-      #     overwrite: true
-      #     tag: ${{ github.ref_name == 'master' && 'nightly' || format('{0}-{1}', 'nightly', github.ref_name) }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get formatted date
+        id: date
+        run: echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Upload binaries to release tag
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_name: dmvict/Test
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./out/v0.0.4.md
+          asset_name: v0.0.4.md
+          overwrite: true
+          tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}
       # - id: action
       #   uses: Wandalen/wretry.action@master
       #   with:format('{0}-{1}', 'nightly', github.ref_name)

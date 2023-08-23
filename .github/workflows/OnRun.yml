@@ -1,11 +1,13 @@
 
 name : on_run
+on :
+  workflow_dispatch
 
-on:
-  workflow_run:
-    workflows: [ push1, push2 ]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: [ push1, push2 ]
+#     types:
+#       - completed
 
 jobs:
   runs_check :

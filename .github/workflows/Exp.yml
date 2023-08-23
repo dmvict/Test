@@ -1,5 +1,7 @@
-# name : exp
-#
+name : exp
+on :
+  workflow_dispatch
+
 # on :
 #   push :
 #     branches : [ master ]

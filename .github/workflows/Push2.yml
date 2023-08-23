@@ -25,7 +25,7 @@ jobs:
           file: ./out/v0.0.4.md
           asset_name: v0.0.4.md
           overwrite: true
-          tag: ${{ github.ref == 'master' && github.ref || 'nightly' }}
+          tag: ${{ github.ref_name == 'master' && github.ref || 'nightly' }}
       # - id: action
       #   uses: Wandalen/wretry.action@master
       #   with:

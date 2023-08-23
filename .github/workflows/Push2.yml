@@ -25,10 +25,10 @@ jobs:
           file: ./out/v0.0.4.md
           asset_name: v0.0.4.md
           overwrite: true
-          tag: ${{ github.ref_name == 'master' && format('{0}-{1}', 'nightly', github.ref_name) || 'nightly' }}
+          tag: ${{ github.ref_name == 'master' && 'nightly' || format('{0}-{1}', 'nightly', github.ref_name) }}
       # - id: action
       #   uses: Wandalen/wretry.action@master
-      #   with:
+      #   with:format('{0}-{1}', 'nightly', github.ref_name)
       #     attempt_limit: 3
       #     command: |
       #       echo $(pwd)

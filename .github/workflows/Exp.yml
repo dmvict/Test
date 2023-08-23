@@ -13,11 +13,11 @@ jobs:
 
       - name: Configure git
         env:
-          USER: dmvict
+          USERNAME: dmvict
         run: |
-          git config user.name ${{ env.USER }}
+          git config user.name ${{ env.USERNAME }}
           git config user.email dm.vict.kr@gmail.com
-          git remote set-url origin https://${{ env.USER }}:${{github.token}}@github.com/dmvict/Test.git
+          git remote set-url origin https://${{ env.USERNAME }}:${{ github.token }}@github.com/${{ github.repository }}.git
 
       - name: Commit updates
         run: |

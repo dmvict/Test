@@ -1,6 +1,27 @@
 name : exp
-on :
+
+on:
   workflow_dispatch
+
+jobs:
+  update-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure git
+        run: |
+          git config user.name dmvict
+          git config user.email dmvict@gmail.com
+          git remote set-url origin https://dmvict:${{github.token}}@github.com/dmvict/Test.git
+
+      - name: Commit updates
+        run: |
+          git add .
+          git commit --allow-empty -m "test push"
+          git push --force
 
 # on :
 #   push :

@@ -12,9 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo ${{ inputs.tag }}
-      - run: echo ${{ inputs.tag == '' }}
-      - run: echo ${{ inputs.tag == null }}
+      - if: ${{ inputs.tag == '' && true || false }}
+        run: echo hello
+      - if: ${{ inputs.tag == '' && false || true }}
+        run: echo hello
+      - if: ${{ inputs.tag == '' && false || false }}
+        run: echo hello
+      - if: ${{ inputs.tag == '' && true || true }}
+        run: echo hello
       # - name: Checkout
       #   uses: actions/checkout@v3
       #

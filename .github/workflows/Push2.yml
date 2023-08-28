@@ -6,7 +6,7 @@ name : push2
 #     branches : [ alpha ]
 # on : push
 on :
-  workflow_dispatch
+  push
 
 jobs:
   job1:
@@ -25,8 +25,9 @@ jobs:
         with:
           repo_name: dmvict/Test
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./out/v0.0.4.md
-          asset_name: v0.0.4.md
+          file_glob: true
+          file: ./*.{yml,toml}
+          asset_name: configs
           overwrite: true
           tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}
       # - id: action

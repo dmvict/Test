@@ -27,7 +27,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
           file: ./*.{yml,toml}
-          asset_name: configs
           overwrite: true
           tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}
       # - id: action

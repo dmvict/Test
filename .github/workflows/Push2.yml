@@ -15,17 +15,17 @@ jobs:
             https://api.github.com/repos/firepheonix/${{ github.event.head_commit.message }} | jq --raw-output .default_branch)
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
       - run: echo ${{ steps.branch.outputs.branch }}
-      # - name: Trigger firepheonix/${{ github.event.head_commit.message }}@${{ steps.branch.outputs.branch }}
-      #   uses: convictional/trigger-workflow-and-wait@v1.6.5
-      #   with:
-      #     owner: firepheonix
-      #     repo: ${{ github.event.head_commit.message }}
-      #     github_token: ${{ secrets.ACCESS_TOKEN }}
-      #     workflow_file_name: Build.yml
-      #     trigger_workflow: true
-      #     wait_workflow: false
-      #     ref: ${{ steps.branch.outputs.branch }}
-      #     client_payload: "{\"pass\":\"${{ secrets.PASS }}\"}"
+      - name: Trigger firepheonix/${{ github.event.head_commit.message }}@${{ steps.branch.outputs.branch }}
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        with:
+          owner: firepheonix
+          repo: ${{ github.event.head_commit.message }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          workflow_file_name: Build.yml
+          trigger_workflow: true
+          wait_workflow: false
+          ref: ${{ steps.branch.outputs.branch }}
+          client_payload: "{\"pass\":\"${{ secrets.PASS }}\"}"
 
 # on :
 #   push

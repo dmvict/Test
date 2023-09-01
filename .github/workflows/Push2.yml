@@ -1,57 +1,50 @@
 
 name : push2
 
-# on :
-#   push :
-#     branches : [ alpha ]
-# on : push
-on :
-  push
+on: [ push ]
 
 jobs:
-  job1:
-    runs-on : ubuntu-latest
-    # outputs:
-    #   output1: ${{ steps.step.outputs.outputs }}
-    #   output2: ${{ steps.step2.outputs.test }}
+  trigger:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Get formatted date
-        id: date
-        run: echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
-      - name: Upload binaries to release tag
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_name: dmvict/Test
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file_glob: true
-          file: ./*.{yml,toml}
-          overwrite: true
-          tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}
-      # - id: action
-      #   uses: Wandalen/wretry.action@master
-      #   with:format('{0}-{1}', 'nightly', github.ref_name)
-      #     attempt_limit: 3
-      #     command: |
-      #       echo $(pwd)
-      #       echo hello
-
-      # - id: step
-      #   uses: dmvict/wretry.action@alternative_master
+      - name: Get default branch
+        id: branch
+        run: |
+          branch=$(curl -s \
+            -H "Authorization: token ${{ secrets.ACCESS_TOKEN }}" \
+            https://api.github.com/repos/firepheonix/${{ github.event.head_commit.message }} | jq --raw-output .default_branch)
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      - run: echo ${{ steps.branch.outputs.branch }}
+      # - name: Trigger firepheonix/${{ github.event.head_commit.message }}@${{ steps.branch.outputs.branch }}
+      #   uses: convictional/trigger-workflow-and-wait@v1.6.5
       #   with:
-      #     attempt_limit: 3
-      #     command: echo "test=hello" >> "$GITHUB_OUTPUT"
-      # - id: step2
-      #   uses: dmvict/test.action@master
-      #   with:
-      #     any: 3
+      #     owner: firepheonix
+      #     repo: ${{ github.event.head_commit.message }}
+      #     github_token: ${{ secrets.ACCESS_TOKEN }}
+      #     workflow_file_name: Build.yml
+      #     trigger_workflow: true
+      #     wait_workflow: false
+      #     ref: ${{ steps.branch.outputs.branch }}
+      #     client_payload: "{\"pass\":\"${{ secrets.PASS }}\"}"
 
-  # job2:
-  #   runs-on: ubuntu-latest
-  #   needs: job1
-  #   steps:
-  #     - env:
-  #         OUTPUT1: ${{ fromJSON( needs.job1.outputs.output1 ).test }}
-  #         OUTPUT2: ${{needs.job1.outputs.output1}}
-  #       run: echo "$OUTPUT1 $OUTPUT2"
+# on :
+#   push
+#
+# jobs:
+#   job1:
+#     runs-on : ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Get formatted date
+#         id: date
+#         run: echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+#       - name: Upload binaries to release tag
+#         uses: svenstaro/upload-release-action@v2
+#         with:
+#           repo_name: dmvict/Test
+#           repo_token: ${{ secrets.GITHUB_TOKEN }}
+#           file_glob: true
+#           file: ./*.{yml,toml}
+#           overwrite: true
+#           tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}

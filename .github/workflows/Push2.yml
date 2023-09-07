@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - run: echo "echo hello" > script.sh
-      - run: bash -s < script.sh
+      - run: bash ./script.sh
       # - name: Get default branch
       #   id: branch
       #   run: |

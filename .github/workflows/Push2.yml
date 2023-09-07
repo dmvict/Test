@@ -7,8 +7,10 @@ jobs:
   trigger:
     runs-on: windows-latest
     steps:
-      - run: echo "echo hello" > script.sh
-      - run: bash ./script.sh
+      - run: |
+          export foo=foo
+          echo $foo
+      # - run: bash ./script.sh
       # - name: Get default branch
       #   id: branch
       #   run: |

@@ -21,21 +21,21 @@ jobs:
           NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
           OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
           echo "files={\"modules\":$OUTPUT}"
-          echo "files=\{\"modules\":$OUTPUT\}" >> GITHUB_OUTPUT
+          echo "files='{\"modules\":$OUTPUT\}'" >> GITHUB_OUTPUT
       - run: echo ${{ steps.workflow_files.outputs.files }}
-
-  runs_check :
-    needs :
-      - get_modules
-    # strategy :
-    #   matrix : ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
-    runs-on : ubuntu-latest
-    steps :
-      - run : echo ${{ needs.get_modules.outputs.workflow_files }}
-      - run : echo ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
-
-      - run : echo ${{ needs.get_modules.outputs.files }}
-      - run : echo ${{ fromJSON( needs.get_modules.outputs.files ) }}
+  #
+  # runs_check :
+  #   needs :
+  #     - get_modules
+  #   # strategy :
+  #   #   matrix : ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
+  #   runs-on : ubuntu-latest
+  #   steps :
+  #     - run : echo ${{ needs.get_modules.outputs.workflow_files }}
+  #     - run : echo ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
+  #
+  #     - run : echo ${{ needs.get_modules.outputs.files }}
+  #     - run : echo ${{ fromJSON( needs.get_modules.outputs.files ) }}
 
 # on :
 #   push

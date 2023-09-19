@@ -20,7 +20,8 @@ jobs:
           done;
           NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
           OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
-          echo "files={\"modules\":$OUTPUT}" >> GITHUB_OUTPUT
+          echo "files={\"modules\":$OUTPUT}"
+          echo "files=\{\"modules\":$OUTPUT\}" >> GITHUB_OUTPUT
 
   runs_check :
     needs :

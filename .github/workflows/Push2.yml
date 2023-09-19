@@ -22,7 +22,9 @@ jobs:
           OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
           echo "files={\"modules\":$OUTPUT}"
           echo "files=$OUTPUT" >> GITHUB_OUTPUT
+          echo "ff=$OUTPUT" >> GITHUB_OUTPUT
       - run: echo ${{ steps.workflow_files.outputs.files }}
+      - run: echo ${{ steps.workflow_files.outputs.ff }}
   #
   # runs_check :
   #   needs :

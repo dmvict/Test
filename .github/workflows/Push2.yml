@@ -26,7 +26,7 @@ jobs:
           # echo "ff='$OUT'" >> GITHUB_OUTPUT
           # echo "ffa=a" >> GITHUB_OUTPUT
 
-          WORKFLOWS=$(ls .github/workflows | grep Module)
+          WORKFLOWS=$(ls .github/workflows)
           for WORKFLOW in $WORKFLOWS ; do
             NAME=$(cat .github/workflows/$WORKFLOW | grep -G '^name :' | sed 's/name\s*:\s\+\(\S*\)/\1/')
             NAMES="$NAMES%0A$NAME"

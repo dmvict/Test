@@ -18,12 +18,14 @@ jobs:
             NAME=$(echo $WORKFLOW | sed 's/\(\S\+\).yml/\1/')
             NAMES="$NAMES $NAME"
           done;
-          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
-          OUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
-          echo "files={\"modules\":$OUT}"
-          echo "files=$OUT" >> GITHUB_OUTPUT
-          echo "ff='$OUT'" >> GITHUB_OUTPUT
-          echo "ffa=a" >> GITHUB_OUTPUT
+          echo "ffa=$NAMES" >> GITHUB_OUTPUT
+
+          # NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
+          # OUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
+          # echo "files={\"modules\":$OUT}"
+          # echo "files=$OUT" >> GITHUB_OUTPUT
+          # echo "ff='$OUT'" >> GITHUB_OUTPUT
+          # echo "ffa=a" >> GITHUB_OUTPUT
       - run: echo ${{ steps.workflow_files.outputs.files }}
       - run: echo ${{ steps.workflow_files.outputs.ff }}
       - run: echo ${{ steps.workflow_files.outputs.ffa }}

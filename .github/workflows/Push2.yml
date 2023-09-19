@@ -4,32 +4,33 @@ name : push2
 on: [ push ]
 
 jobs:
-  trigger:
-    runs-on: windows-latest
+
+  get_modules:
+    outputs :
+      workflow_files: ${{ steps.workflow_files.outputs.files }}
+    runs-on: ubuntu-latest
     steps:
-      - run: |
-          export foo=foo
-          echo $foo
-      # - run: bash ./script.sh
-      # - name: Get default branch
-      #   id: branch
-      #   run: |
-      #     branch=$(curl -s \
-      #       -H "Authorization: token ${{ secrets.ACCESS_TOKEN }}" \
-      #       https://api.github.com/repos/firepheonix/${{ github.event.head_commit.message }} | jq --raw-output .default_branch)
-      #     echo "branch=$branch" >> "$GITHUB_OUTPUT"
-      # - run: echo ${{ steps.branch.outputs.branch }}
-      # - name: Trigger firepheonix/${{ github.event.head_commit.message }}@${{ steps.branch.outputs.branch }}
-      #   uses: convictional/trigger-workflow-and-wait@v1.6.5
-      #   with:
-      #     owner: firepheonix
-      #     repo: ${{ github.event.head_commit.message }}
-      #     github_token: ${{ secrets.ACCESS_TOKEN }}
-      #     workflow_file_name: Build.yml
-      #     trigger_workflow: true
-      #     wait_workflow: false
-      #     ref: ${{ steps.branch.outputs.branch }}
-      #     client_payload: "{\"pass\":\"abs\"}"
+      - uses: actions/checkout@v3
+      - id: workflow_files
+        run: |
+          WORKFLOWS=$(ls .github/workflows | grep Module)
+          for WORKFLOW in $WORKFLOWS ; do
+            NAME=$(echo $WORKFLOW | sed 's/\(\S\+\).yml/\1/')
+            NAMES="$NAMES $NAME"
+          done;
+          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
+          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
+          echo "files={\"modules\":$OUTPUT}" >> GITHUB_OUTPUT
+
+  runs_check :
+    needs :
+      - get_modules
+    # strategy :
+    #   matrix : ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
+    runs-on : ubuntu-latest
+    steps :
+      - run : echo ${{ needs.get_modules.outputs.workflow_files }}
+      - run : echo ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
 
 # on :
 #   push

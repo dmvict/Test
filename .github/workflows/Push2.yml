@@ -23,7 +23,7 @@ jobs:
           echo "files={\"modules\":$OUT}"
           echo "files=$OUT" >> GITHUB_OUTPUT
           echo "ff='$OUT'" >> GITHUB_OUTPUT
-          echo "ffa='$OUT'a" >> GITHUB_OUTPUT
+          echo "ffa=a" >> GITHUB_OUTPUT
       - run: echo ${{ steps.workflow_files.outputs.files }}
       - run: echo ${{ steps.workflow_files.outputs.ff }}
       - run: echo ${{ steps.workflow_files.outputs.ffa }}

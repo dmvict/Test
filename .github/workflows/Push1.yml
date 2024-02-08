@@ -7,7 +7,7 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: Wandalen/wretry.action@v1.4.0
+      - uses: Wandalen/wretry.action@master
         with:
           action: action/setup-node@2.3.0
           with: |

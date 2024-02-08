@@ -9,7 +9,7 @@ jobs:
     steps :
       - uses: Wandalen/wretry.action@v1.4.4
         with:
-          action: action/setup-node@2.3.0
+          action: action/node-setup@2.3.0
           with: |
             node-version: 14.x
             architecture: x64

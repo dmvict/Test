@@ -1,55 +1,55 @@
 
-name : push2
-
-on: [ push ]
-
-jobs:
-
-  get_modules:
-    outputs :
-      workflow_files: ${{ steps.workflow_files.outputs.files }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - id: workflow_files
-        run: |
-          WORKFLOWS=$(ls .github/workflows)
-          for WORKFLOW in $WORKFLOWS ; do
-            NAME=$(echo $WORKFLOW | sed 's/\(\S\+\).yml/\1/')
-            NAMES="$NAMES $NAME"
-          done;
-          NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
-          OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
-          echo "files={\"modules\":$OUTPUT}" >> $GITHUB_OUTPUT
-
-  runs_check :
-    needs :
-      - get_modules
-    strategy :
-      matrix : ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
-    runs-on : ubuntu-latest
-    steps :
-      - run : echo ${{ needs.get_modules.outputs.workflow_files }}
-      - run : echo ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
-
-# on :
-#   push
+# name : push2
+#
+# on: [ push ]
 #
 # jobs:
-#   job1:
-#     runs-on : ubuntu-latest
+#
+#   get_modules:
+#     outputs :
+#       workflow_files: ${{ steps.workflow_files.outputs.files }}
+#     runs-on: ubuntu-latest
 #     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
-#       - name: Get formatted date
-#         id: date
-#         run: echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
-#       - name: Upload binaries to release tag
-#         uses: svenstaro/upload-release-action@v2
-#         with:
-#           repo_name: dmvict/Test
-#           repo_token: ${{ secrets.GITHUB_TOKEN }}
-#           file_glob: true
-#           file: ./*.{yml,toml}
-#           overwrite: true
-#           tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}
+#       - uses: actions/checkout@v3
+#       - id: workflow_files
+#         run: |
+#           WORKFLOWS=$(ls .github/workflows)
+#           for WORKFLOW in $WORKFLOWS ; do
+#             NAME=$(echo $WORKFLOW | sed 's/\(\S\+\).yml/\1/')
+#             NAMES="$NAMES $NAME"
+#           done;
+#           NAMES=$(sed 's/\s\+/\n/g' <<< $NAMES)
+#           OUTPUT=$(echo "$NAMES" | jq -R -s -c 'split("\n")[1:-1]')
+#           echo "files={\"modules\":$OUTPUT}" >> $GITHUB_OUTPUT
+#
+#   runs_check :
+#     needs :
+#       - get_modules
+#     strategy :
+#       matrix : ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
+#     runs-on : ubuntu-latest
+#     steps :
+#       - run : echo ${{ needs.get_modules.outputs.workflow_files }}
+#       - run : echo ${{ fromJSON( needs.get_modules.outputs.workflow_files ) }}
+#
+# # on :
+# #   push
+# #
+# # jobs:
+# #   job1:
+# #     runs-on : ubuntu-latest
+# #     steps:
+# #       - name: Checkout
+# #         uses: actions/checkout@v3
+# #       - name: Get formatted date
+# #         id: date
+# #         run: echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+# #       - name: Upload binaries to release tag
+# #         uses: svenstaro/upload-release-action@v2
+# #         with:
+# #           repo_name: dmvict/Test
+# #           repo_token: ${{ secrets.GITHUB_TOKEN }}
+# #           file_glob: true
+# #           file: ./*.{yml,toml}
+# #           overwrite: true
+# #           tag: ${{ format('{0}-{1}', 'nightly', steps.date.outputs.date) }}

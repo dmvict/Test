@@ -1,64 +1,64 @@
-name : exp
-
-on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: The tag to build Nargo from (leave empty to build a nightly release from master)
-        required: false
-
-jobs:
-  update-and-publish:
-    runs-on: ubuntu-latest
-
-    steps:
-      - if: ${{ inputs.tag == '' && true || false }}
-        run: echo hello
-      - if: ${{ inputs.tag == '' && false || true }}
-        run: echo hello
-      - if: ${{ inputs.tag == '' && false || false }}
-        run: echo hello
-      - if: ${{ inputs.tag == '' && true || true }}
-        run: echo hello
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-      #
-      # - name: Configure git
-      #   env:
-      #     USERNAME: dmvict
-      #   run: |
-      #     git config user.name ${{ env.USERNAME }}
-      #     git config user.email dm.vict.kr@gmail.com
-      #     git remote set-url origin https://${{ github.repository_owner }}:${{ github.token }}@github.com/${{ github.repository }}.git
-      #
-      # - name: Commit updates
-      #   run: |
-      #     git add .
-      #     git commit --allow-empty -m "test push"
-      #     git push --force
-
-# on :
-#   push :
-#     branches : [ master ]
-#     tags: '**'
+# name : exp
+#
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       tag:
+#         description: The tag to build Nargo from (leave empty to build a nightly release from master)
+#         required: false
 #
 # jobs:
-#   success :
-#     runs-on : ubuntu-latest
-#     steps :
-#       - uses : dmvict/wretry.action@master
-#         with:
-#           command: echo foo
-  # failure :
-  #   runs-on : ubuntu-latest
-  #   steps :
-  #     - uses : Wandalen/wretry.action@js_action
-  #       with:
-  #         action: dmvict/test.action@multiline_option
-  #         with: |
-  #           multiline: |
-  #             one
-  #             two
-  #           string: |
-  #         attempt_limit: 3
-  #         attempt_delay: 2000
+#   update-and-publish:
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       - if: ${{ inputs.tag == '' && true || false }}
+#         run: echo hello
+#       - if: ${{ inputs.tag == '' && false || true }}
+#         run: echo hello
+#       - if: ${{ inputs.tag == '' && false || false }}
+#         run: echo hello
+#       - if: ${{ inputs.tag == '' && true || true }}
+#         run: echo hello
+#       # - name: Checkout
+#       #   uses: actions/checkout@v3
+#       #
+#       # - name: Configure git
+#       #   env:
+#       #     USERNAME: dmvict
+#       #   run: |
+#       #     git config user.name ${{ env.USERNAME }}
+#       #     git config user.email dm.vict.kr@gmail.com
+#       #     git remote set-url origin https://${{ github.repository_owner }}:${{ github.token }}@github.com/${{ github.repository }}.git
+#       #
+#       # - name: Commit updates
+#       #   run: |
+#       #     git add .
+#       #     git commit --allow-empty -m "test push"
+#       #     git push --force
+#
+# # on :
+# #   push :
+# #     branches : [ master ]
+# #     tags: '**'
+# #
+# # jobs:
+# #   success :
+# #     runs-on : ubuntu-latest
+# #     steps :
+# #       - uses : dmvict/wretry.action@master
+# #         with:
+# #           command: echo foo
+#   # failure :
+#   #   runs-on : ubuntu-latest
+#   #   steps :
+#   #     - uses : Wandalen/wretry.action@js_action
+#   #       with:
+#   #         action: dmvict/test.action@multiline_option
+#   #         with: |
+#   #           multiline: |
+#   #             one
+#   #             two
+#   #           string: |
+#   #         attempt_limit: 3
+#   #         attempt_delay: 2000

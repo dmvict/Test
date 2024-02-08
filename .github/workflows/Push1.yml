@@ -1,19 +1,18 @@
 
 name : push1
 
-on :
-  push :
-    branches : [ alpha ]
+on : push
 
 jobs:
   success :
     if : "startsWith( github.event.head_commit.message, 'success' )"
     runs-on : ubuntu-latest
     steps :
-      - run : exit 0
-
-  failure :
-    if : "startsWith( github.event.head_commit.message, 'failure' )"
-    runs-on : ubuntu-latest
-    steps :
-      - run : exit 1
+      - uses: Wandalen/wretry.action@v1.4.0
+        with:
+          action: action/setup-node@2.3.0
+          with: |
+            node-version: 14.x
+            architecture: x64
+          attempt_limit: 3
+          attempt_delay: 2000

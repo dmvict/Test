@@ -7,6 +7,9 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
+      - uses: actions/checkout@v4
+        with:
+          ref: alt
       - uses: Wandalen/wretry.action@v1.4.4
         with:
           action: dmvict/test.action@v0.0.2

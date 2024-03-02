@@ -7,16 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: actions/checkout@v4
+      - uses: dmvict/wretry.action@alt
         with:
-          ref: alt
-      - uses: Wandalen/wretry.action@v1.4.5
-        with:
-          command: |
-            if [[ $HOME == "/home/github" ]] ; then
-              echo github
-            else
-              echo nongithub
-            fi
+          action: dmvict/test.action@alt
           attempt_limit: 3
           attempt_delay: 2000

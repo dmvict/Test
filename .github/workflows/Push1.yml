@@ -11,7 +11,12 @@ jobs:
         with:
           action: dmvict/test.action@alt
           with: |
-            singleline: abc
+            singleline: |
+              some
+
+              foo
+
+                bar
             multiline: |
               some
 

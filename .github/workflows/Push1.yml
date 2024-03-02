@@ -11,17 +11,10 @@ jobs:
         with:
           action: dmvict/test.action@alt
           with: |
-            singleline: |
-              some
-
-              foo
-
-                bar
+            singleline: 5
             multiline: |
               some
-
               foo
-
                 bar
             true_v: true
           attempt_limit: 3

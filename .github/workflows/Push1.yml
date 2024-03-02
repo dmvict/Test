@@ -10,5 +10,14 @@ jobs:
       - uses: dmvict/wretry.action@alt
         with:
           action: dmvict/test.action@alt
+          with: |
+            singleline: abc
+            multiline: |
+              some
+
+              foo
+
+                bar
+            true_v: true
           attempt_limit: 3
           attempt_delay: 2000

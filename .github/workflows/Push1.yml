@@ -7,8 +7,9 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: Wandalen/wretry.action@master
-        with:
-          action: dmvict/test.action.private
-          attempt_limit: 3
-          attempt_delay: 2000
+      # - uses: Wandalen/wretry.action@master
+      #   with:
+      #     action: dmvict/test.action.private
+      #     attempt_limit: 3
+      #     attempt_delay: 2000
+      - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git

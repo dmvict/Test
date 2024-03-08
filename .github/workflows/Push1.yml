@@ -7,15 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: dmvict/wretry.action@alt
+      - uses: Wandalen/wretry.action@master
         with:
-          action: dmvict/test.action@alt
-          with: |
-            singleline: 5
-            multiline: |
-              some
-              foo
-                bar
-            true_v: true
+          action: dmvict/test.action.private
           attempt_limit: 3
           attempt_delay: 2000

@@ -9,7 +9,10 @@ jobs:
     steps :
       - uses: Wandalen/wretry.action@master
         with:
-          action: actions/hello-world-docker-action@main
+          action: oasdiff/oasdiff-action/breaking@main
+          with: |
+            base: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+            revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
           attempt_limit: 3
           attempt_delay: 2000
       # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git

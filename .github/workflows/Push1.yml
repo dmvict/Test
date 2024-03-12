@@ -38,5 +38,5 @@ jobs:
         id: test
         with:
           string: 'foo bar baz'
-          # bool-like: false
+          bool-like: false
       - run: echo -en "${{ toJSON( steps.test.outputs ) }}"

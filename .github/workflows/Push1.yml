@@ -8,19 +8,19 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       - uses: actions/checkout@v4
-      # - uses: Wandalen/wretry.action@master
-      #   with:
-      #     action: oasdiff/oasdiff-action/breaking@main
-      #     with: |
-      #       base: './openapi.yaml'
-      #       revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-      #       # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
-      #       # fail-on-diff: true
-      #     attempt_limit: 3
-      #     attempt_delay: 2000
-      - uses: oasdiff/oasdiff-action/breaking@main
+      - uses: Wandalen/wretry.action@master
         with:
-          base: './openapi.yaml'
-          revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-          fail-on-diff: true
+          action: oasdiff/oasdiff-action/breaking@main
+          with: |
+            base: './openapi.yaml'
+            revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+            # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
+            fail-on-diff: true
+          attempt_limit: 3
+          attempt_delay: 2000
+      # - uses: oasdiff/oasdiff-action/breaking@main
+      #   with:
+      #     base: './openapi.yaml'
+      #     revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+      #     fail-on-diff: true
       # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git

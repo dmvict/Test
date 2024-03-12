@@ -7,14 +7,18 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: Wandalen/wretry.action@master
+      # - uses: Wandalen/wretry.action@master
+      #   with:
+      #     action: oasdiff/oasdiff-action/breaking@main
+      #     with: |
+      #       base: './openapi.yaml'
+      #       revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+      #       # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
+      #       # fail-on-diff: true
+      #     attempt_limit: 3
+      #     attempt_delay: 2000
+      - uses: oasdiff/oasdiff-action/breaking@main
         with:
-          action: oasdiff/oasdiff-action/breaking@main
-          with: |
-            base: './openapi.yaml'
-            revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-            # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
-            # fail-on-diff: true
-          attempt_limit: 3
-          attempt_delay: 2000
+          base: './openapi.yaml'
+          revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
       # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git

@@ -34,4 +34,4 @@ jobs:
             bool-like: false
           attempt_limit: 3
           attempt_delay: 2000
-      - run: echo ${{ steps.test.outputs }}
+      - run: echo ${{ toJSON( steps.test.outputs ) }}

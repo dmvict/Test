@@ -31,7 +31,7 @@ jobs:
           action: dmvict/test.action@docker
           with: |
             string: 'foo bar baz'
-            # bool-like: false
+            bool-like: true
           attempt_limit: 3
           attempt_delay: 2000
       - run: echo ${{ toJSON( steps.test.outputs ) }}

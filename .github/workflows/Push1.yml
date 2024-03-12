@@ -11,7 +11,7 @@ jobs:
         with:
           action: oasdiff/oasdiff-action/breaking@main
           with: |
-            base: './openapi.yaml'
+            base: ./openapi.yaml
             revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
             fail-on-diff: true
           attempt_limit: 3

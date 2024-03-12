@@ -7,7 +7,7 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: actions/checkout
+      - uses: actions/checkout@v4
       # - uses: Wandalen/wretry.action@master
       #   with:
       #     action: oasdiff/oasdiff-action/breaking@main
@@ -22,4 +22,5 @@ jobs:
         with:
           base: './openapi.yaml'
           revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+          fail-on-diff: true
       # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git

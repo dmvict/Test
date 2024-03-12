@@ -11,8 +11,9 @@ jobs:
         with:
           action: oasdiff/oasdiff-action/breaking@main
           with: |
-            base: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+            base: './openapi.yaml'
             revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
+            fail-on-diff: true
           attempt_limit: 3
           attempt_delay: 2000
       # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git

@@ -15,6 +15,7 @@ jobs:
             # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
             revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
             fail-on-diff: true
+            include-checks: api-operation-id-removed
           attempt_limit: 3
           attempt_delay: 2000
 

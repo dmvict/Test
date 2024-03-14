@@ -7,24 +7,23 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      # - uses: actions/checkout@v4
-      # - uses: Wandalen/wretry.action@master
-      #   with:
-      #     action: oasdiff/oasdiff-action/breaking@main
-      #     with: |
-      #       base: './openapi.yaml'
-      #       revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-      #       # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
-      #       # fail-on-diff: true
-      #     attempt_limit: 3
-      #     attempt_delay: 2000
+      - uses: dmvict/wretry.action@alt
+        with:
+          action: oasdiff/oasdiff-action/breaking@main
+          with: |
+            base: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+            # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
+            revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
+            fail-on-diff: true
+          attempt_limit: 3
+          attempt_delay: 2000
+
       # - uses: oasdiff/oasdiff-action/breaking@main
       #   with:
       #     base: './openapi.yaml'
       #     revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
       #     fail-on-diff: true
       # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git
-
       # - uses: dmvict/wretry.action@alt
       #   id: test
       #   with:
@@ -34,9 +33,9 @@ jobs:
       #       # bool-like: false
       #     attempt_limit: 3
       #     attempt_delay: 2000
-      - uses: dmvict/test.action@docker
-        id: test
-        with:
-          string: 'foo bar baz'
-          bool-like: false
-      - run: echo -en "${{ toJSON( steps.test.outputs ) }}"
+      # - uses: dmvict/test.action@docker
+      #   id: test
+      #   with:
+      #     string: 'foo bar baz'
+      #     bool-like: false
+      # - run: echo -en "${{ toJSON( steps.test.outputs ) }}"

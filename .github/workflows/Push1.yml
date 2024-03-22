@@ -9,37 +9,7 @@ jobs:
     steps :
       - uses: dmvict/wretry.action@alt
         with:
-          action: oasdiff/oasdiff-action/breaking@main
+          action: dmvict/test.action.private@master
           with: |
-            base: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-            # revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-            revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test3.yaml
-            # fail-on-diff: true
-            # include-checks: api-operation-id-removed
-            # deprecation-days-beta: 90
-            # deprecation-days-stable: 90
-            # exclude-elements: title
           attempt_limit: 3
           attempt_delay: 2000
-
-      # - uses: oasdiff/oasdiff-action/breaking@main
-      #   with:
-      #     base: './openapi.yaml'
-      #     revision: https://raw.githubusercontent.com/Tufin/oasdiff/main/data/openapi-test1.yaml
-      #     fail-on-diff: true
-      # - run: git clone https://oauth2:${{ secrets.PRIVATE_TOKEN }}@github.com/dmvict/test.action.private.git
-      # - uses: dmvict/wretry.action@alt
-      #   id: test
-      #   with:
-      #     action: dmvict/test.action@docker
-      #     with: |
-      #       string: 'foo bar baz'
-      #       # bool-like: false
-      #     attempt_limit: 3
-      #     attempt_delay: 2000
-      # - uses: dmvict/test.action@docker
-      #   id: test
-      #   with:
-      #     string: 'foo bar baz'
-      #     bool-like: false
-      # - run: echo -en "${{ toJSON( steps.test.outputs ) }}"

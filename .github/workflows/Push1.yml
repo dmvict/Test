@@ -7,11 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - run: exit 1
-      - uses: dmvict/wretry.action@alt
+      - run: exit 0
+      - uses: dmvict/test.action@conditions
         with:
-          action: dmvict/test.action@conditions
-          with: |
-            value: 0
-          attempt_limit: 3
-          attempt_delay: 2000
+          value: 1
+      - run: exit 0

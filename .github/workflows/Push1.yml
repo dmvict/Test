@@ -7,8 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - run: exit 0
+      - run: exit 1
       - uses: dmvict/test.action@conditions
         with:
           value: 1
-      - run: exit 1
+      - run: exit 0

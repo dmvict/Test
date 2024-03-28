@@ -6,11 +6,11 @@ on : push
 jobs:
   success :
     runs-on : ubuntu-latest
+    env:
+      TEST: false
     steps :
-      - run: exit 0
       - uses: dmvict/wretry.action@alt
         with:
           action: dmvict/test.action@conditions
           with: |
             value: 1
-      - run: exit 1

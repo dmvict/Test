@@ -7,7 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: dmvict/wretry.action@alt
+      - uses: Wandalen/wretry.action@v3
+      # - uses: dmvict/wretry.action@alt
         env:
           TEST: true
         with:

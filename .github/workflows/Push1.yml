@@ -14,4 +14,4 @@ jobs:
           action: dmvict/test.action@conditions
           with: |
             value: 1
-      - run: exit 0
+      - run: exit 1

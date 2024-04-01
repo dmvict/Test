@@ -7,12 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses: Wandalen/wretry.action@v3
-      # - uses: dmvict/wretry.action@alt
-        env:
-          TEST: true
+      # - uses: Wandalen/wretry.action@v3
+      - uses: dmvict/wretry.action@alt
         with:
-          action: dmvict/test.action@conditions
-          with: |
-            value: 1
+          action: actions/checkout@v4
       - run: exit 1

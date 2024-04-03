@@ -10,7 +10,7 @@ jobs:
       # - uses: Wandalen/wretry.action@v3
       - uses: dmvict/wretry.action@alt
         with:
-          retry_condition: false
+          retry_condition: '2 > 4'
           command: exit 1
           attempt_limit: 4
           attempt_delay: 3000

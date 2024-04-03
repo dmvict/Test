@@ -10,5 +10,7 @@ jobs:
       # - uses: Wandalen/wretry.action@v3
       - uses: dmvict/wretry.action@alt
         with:
-          action: actions/checkout@v4
-      - run: exit 1
+          retry_condition: github.ref_name == 'master'
+          command: exit 1
+          attempt_limit: 4
+          attempt_delay: 3000

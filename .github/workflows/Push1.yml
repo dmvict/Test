@@ -11,6 +11,8 @@ jobs:
       - uses: dmvict/wretry.action@alt
         with:
           retry_condition: github.event_name == 'push'
-          command: exit 1
+          action: dmvict/test.action@v0.0.2
+          with: |
+            value: 0
           attempt_limit: 4
           attempt_delay: 3000

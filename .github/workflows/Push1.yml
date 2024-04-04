@@ -10,7 +10,7 @@ jobs:
       # - uses: Wandalen/wretry.action@v3
       - uses: dmvict/wretry.action@alt
         with:
-          retry_condition: github.event_name == 'push'
+          retry_condition: github.event_name == 'pull'
           action: dmvict/test.action@v0.0.2
           with: |
             value: 0

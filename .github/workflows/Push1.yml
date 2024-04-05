@@ -8,11 +8,12 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       # - uses: Wandalen/wretry.action@v3
-      - uses: dmvict/wretry.action@alt
+      - uses: dmvict/wretry.action@alt_conditions
         env:
           TEST: 'false'
         with:
           action: dmvict/test.action@docker_conditions
+          pre: false
           with: |
             string: -al
             bool-like: /

@@ -11,7 +11,7 @@ jobs:
       - uses: dmvict/wretry.action@alt_conditions
         with:
           action: dmvict/test.action@docker_conditions
-          branch: js_action_alt
+          branch: js_action
           with: |
             string: -al
             bool-like: /

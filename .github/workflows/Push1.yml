@@ -10,11 +10,11 @@ jobs:
       # - uses: Wandalen/wretry.action@v3
       - uses: dmvict/wretry.action@alt
         env:
-          TEST: 'true'
+          TEST: 'false'
         with:
           action: dmvict/test.action@docker_conditions
           with: |
-            string: foo
-            bool-like: false
+            string: -al
+            bool-like: /
           attempt_limit: 4
           attempt_delay: 3000

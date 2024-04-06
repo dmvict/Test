@@ -8,7 +8,7 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       # - uses: Wandalen/wretry.action@v3
-      - uses: dmvict/wretry.action/main@alt_conditions
+      - uses: dmvict/wretry.action/pre@alt_conditions
         with:
           action: dmvict/test.action@docker_conditions
           branch: js_action

@@ -18,6 +18,8 @@ jobs:
       #       bool-like: /
       #     attempt_limit: 4
       #     attempt_delay: 3000
+      - name: json
+        run: echo -en '${{ toJSON( steps ) }}'
       - run: echo 'foo=bar' >> $GITHUB_OUTPUT
         id: foo
       - name: json

@@ -22,10 +22,10 @@ jobs:
         id: mmmm
         uses: Wandalen/wretry.action/main@master
         with:
-          action: dmvict/test.action@docker_conditions
-          with: |
-            string: -al
-            bool-like: /
+          action: dmvict/test.action@alt
+          # with: |
+          #   string: -al
+          #   bool-like: /
           attempt_limit: 4
           attempt_delay: 3000
       - name: command

@@ -23,11 +23,10 @@ jobs:
         uses: Wandalen/wretry.action/main@master
         with:
           action: dmvict/test.action@docker_conditions
-          branch: js_action
           with: |
             string: -al
             bool-like: /
           attempt_limit: 4
           attempt_delay: 3000
       - run: echo -n "${{ fromJSON( steps.main.outputs.outputs ) }}"
-      - run: echo -n "${{ fromJSON( steps.main.outputs.outputs.string ) }}"
+      - run: echo -n "${{ fromJSON( steps.main.outputs.outputs ).string }}"

@@ -28,5 +28,5 @@ jobs:
             bool-like: /
           attempt_limit: 4
           attempt_delay: 3000
-      - run: echo -n "${{ fromJSON( steps.main.outputs ) }}"
-      - run: echo -n "${{ fromJSON( steps.main.outputs ).string }}"
+      - run: echo -n "${{ fromJSON( steps.main.outputs ).outputs }}"
+      # - run: echo -n "${{ fromJSON( steps.main.outputs ).string }}"

@@ -22,6 +22,7 @@ jobs:
         id: mmmm
         uses: Wandalen/wretry.action/main@master
         with:
+          retry_condition: fromJSON( steps.mmmm.outputs.outputs ).string == 'foo'
           action: dmvict/test.action@alt
           # with: |
           #   string: -al

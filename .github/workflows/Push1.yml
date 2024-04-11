@@ -29,4 +29,4 @@ jobs:
             bool-like: /
           attempt_limit: 4
           attempt_delay: 3000
-      - run: echo "${{ fromJSON( steps.main.outputs )}}"
+      - run: echo "${{ steps.main.outputs }}"

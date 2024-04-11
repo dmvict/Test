@@ -19,7 +19,7 @@ jobs:
       #     attempt_limit: 4
       #     attempt_delay: 3000
       - name: main
-        id: main
+        id: mmmm
         uses: Wandalen/wretry.action/main@master
         with:
           action: dmvict/test.action@docker_conditions
@@ -29,5 +29,5 @@ jobs:
           attempt_limit: 4
           attempt_delay: 3000
       - name: command
-        run: echo -n "${{ fromJSON( steps.main.outputs ) }}"
+        run: echo -en "${{ fromJSON( steps.mmmm.outputs ) }}"
       # - run: echo -n "${{ fromJSON( steps.main.outputs ).string }}"

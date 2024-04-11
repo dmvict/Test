@@ -18,7 +18,8 @@ jobs:
       #       bool-like: /
       #     attempt_limit: 4
       #     attempt_delay: 3000
-      - name: pre
+      - name: main
+        id: main
         uses: Wandalen/wretry.action/main@master
         with:
           action: dmvict/test.action@docker_conditions
@@ -28,3 +29,4 @@ jobs:
             bool-like: /
           attempt_limit: 4
           attempt_delay: 3000
+      - run: echo "${{ fromJSON( steps.main.outputs )}}"

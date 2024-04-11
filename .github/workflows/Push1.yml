@@ -21,7 +21,7 @@ jobs:
       - run: echo 'foo=bar' >> $GITHUB_OUTPUT
         id: foo
       - name: json
-        run: echo -en ${{ fromJSON( steps ) }}
+        run: echo -en '${{ fromJSON( steps ) }}'
       # - name: command
       #   run: echo -en "${{ steps.foo.outputs.foo }}"
       # - name: main

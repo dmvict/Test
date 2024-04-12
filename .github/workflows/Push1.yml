@@ -27,6 +27,7 @@ jobs:
         with:
           retry_condition: steps.foo.outputs.foo == 'bar'
           action: dmvict/test.action@alt
+          steps_context: ${{ toJSON( steps )}}
           # with: |
           #   string: -al
           #   bool-like: /

@@ -19,13 +19,11 @@ jobs:
       #     attempt_limit: 4
       #     attempt_delay: 3000
 
-      - run: echo 'foo=bar' >> $GITHUB_OUTPUT
-        id: foo
       - name: main
         id: mmmm
         uses: dmvict/wretry.action@alt
         with:
-          retry_condition: steps.foo.outputs.foo == 'bar'
+          retry_condition: steps.mmmm.outputs.foo == 'bar'
           action: dmvict/test.action@alt
           steps_context: ${{ toJSON( steps )}}
           # with: |

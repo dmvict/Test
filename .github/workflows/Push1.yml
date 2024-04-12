@@ -23,7 +23,7 @@ jobs:
         id: foo
       - name: main
         id: mmmm
-        uses: dmvict/wretry.action/main@alt
+        uses: dmvict/wretry.action@alt
         with:
           retry_condition: steps.foo.outputs.foo == 'bar'
           action: dmvict/test.action@alt

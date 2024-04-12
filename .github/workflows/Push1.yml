@@ -18,27 +18,19 @@ jobs:
       #       bool-like: /
       #     attempt_limit: 4
       #     attempt_delay: 3000
-      - name: json
-        run: echo -en '${{ toJSON( steps ) }}'
+
       - run: echo 'foo=bar' >> $GITHUB_OUTPUT
         id: foo
-      - name: json
-        run: echo -en '${{ toJSON( steps ) }}'
-      # - name: command
-      #   run: echo -en "${{ steps.foo.outputs.foo }}"
-      # - name: main
-      #   id: mmmm
-      #   uses: Wandalen/wretry.action/main@master
-      #   with:
-      #     retry_condition: steps.foo.outputs.foo == 'bar'
-      #     action: dmvict/test.action@alt
-      #     # with: |
-      #     #   string: -al
-      #     #   bool-like: /
-      #     attempt_limit: 4
-      #     attempt_delay: 3000
-      # - name: command
-      #   run: echo -en "${{ fromJSON( steps.mmmm.outputs.outputs ) }}"
-      # - name: command2
-      #   run: echo -en "${{ fromJSON( steps.mmmm.outputs.outputs ).string }}"
-      # # - run: echo -n "${{ fromJSON( steps.main.outputs ).string }}"
+      - name: main
+        id: mmmm
+        uses: dmvict/wretry.action/main@alt
+        with:
+          retry_condition: steps.foo.outputs.foo == 'bar'
+          action: dmvict/test.action@alt
+          # with: |
+          #   string: -al
+          #   bool-like: /
+          attempt_limit: 4
+          attempt_delay: 3000
+      - name: command
+        run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"

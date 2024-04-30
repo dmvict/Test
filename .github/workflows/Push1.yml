@@ -19,16 +19,21 @@ jobs:
       #     attempt_limit: 4
       #     attempt_delay: 3000
 
+      # - name: main
+      #   id: mmmm
+      #   uses: dmvict/wretry.action@alt
+      #   with:
+      #     action: dmvict/test.action@docker_conditions
+      #     steps_context: ${{ toJSON( steps )}}
+      #     with: |
+      #       string: -al
+      #       bool-like: /
+      #     attempt_limit: 4
+      #     attempt_delay: 3000
       - name: main
         id: mmmm
-        uses: dmvict/wretry.action@alt
+        uses: dmvict/wretry.action/main@alt
         with:
-          action: dmvict/test.action@docker_conditions
-          steps_context: ${{ toJSON( steps )}}
-          with: |
-            string: -al
-            bool-like: /
-          attempt_limit: 4
-          attempt_delay: 3000
+          command: echo 'string=string' >> $GITHUB_OUTPUT
       - name: command
         run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"

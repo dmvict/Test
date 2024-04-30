@@ -25,11 +25,10 @@ jobs:
         with:
           action: dmvict/test.action@docker_conditions
           steps_context: ${{ toJSON( steps )}}
-          # with: |
-          #   string: -al
-          #   bool-like: /
+          with: |
+            string: -al
+            bool-like: /
           attempt_limit: 4
           attempt_delay: 3000
       - name: command
         run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
-

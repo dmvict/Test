@@ -32,7 +32,7 @@ jobs:
       #     attempt_delay: 3000
       - name: main
         id: mmmm
-        uses: dmvict/wretry.action/main@alt
+        uses: dmvict/wretry.action@alt
         with:
           command: echo 'string=string' >> $GITHUB_OUTPUT
       - name: command

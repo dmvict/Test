@@ -4,56 +4,32 @@ name : push1
 on : push
 
 jobs:
-  # success :
-  #   runs-on : ubuntu-latest
-  #   steps :
-  #     # - uses: Wandalen/wretry.action@v3
-  #     # - name: pre
-  #     #   uses: dmvict/wretry.action/pre@alt_conditions
-  #     #   with:
-  #     #     action: dmvict/test.action@docker_conditions
-  #     #     branch: js_action
-  #     #     with: |
-  #     #       string: -al
-  #     #       bool-like: /
-  #     #     attempt_limit: 4
-  #     #     attempt_delay: 3000
-  #
-  #     - name: main
-  #       id: mmmm
-  #       uses: dmvict/wretry.action@alt
-  #       with:
-  #         retry_condition: steps.mmmm.outputs.foo == 'bar'
-  #         action: dmvict/test.action@alt
-  #         steps_context: ${{ toJSON( steps )}}
-  #         # with: |
-  #         #   string: -al
-  #         #   bool-like: /
-  #         attempt_limit: 4
-  #         attempt_delay: 3000
-  #     - name: command
-  #       run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
-
-  fast :
-    strategy :
-      fail-fast : false
-      matrix :
-        os : [ windows-latest ]
-        node-version : [ 16.x ]
-    runs-on : ${{ matrix.os }}
+  success :
+    runs-on : ubuntu-latest
     steps :
-    - name : ${{ matrix.node-version }}
-      uses : Wandalen/wretry.action@master
-      with :
-        action : actions/setup-node@v4
-        with : |
-          node-version : ${{ matrix.node-version }}
-        attempt_limit : 3
-        attempt_delay: 1000
-    - run: npm i -g willbe@latest
-    # - name : Install willbe
-    #   uses : Wandalen/wretry.action@master
-    #   with :
-    #     command : npm i -g willbe@latest
-    #     attempt_limit : 3
-    #     attempt_delay: 1000
+      # - uses: Wandalen/wretry.action@v3
+      # - name: pre
+      #   uses: dmvict/wretry.action/pre@alt_conditions
+      #   with:
+      #     action: dmvict/test.action@docker_conditions
+      #     branch: js_action
+      #     with: |
+      #       string: -al
+      #       bool-like: /
+      #     attempt_limit: 4
+      #     attempt_delay: 3000
+
+      - name: main
+        id: mmmm
+        uses: dmvict/wretry.action@alt
+        with:
+          action: dmvict/test.action@docker_conditions
+          steps_context: ${{ toJSON( steps )}}
+          # with: |
+          #   string: -al
+          #   bool-like: /
+          attempt_limit: 4
+          attempt_delay: 3000
+      - name: command
+        run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
+

@@ -34,6 +34,11 @@ jobs:
         id: mmmm
         uses: dmvict/wretry.action@alt
         with:
-          command: echo 'string=string' >> $GITHUB_OUTPUT
+          retry_condition: steps._this.outputs.foo == 'foo'
+          action: dmvict/test.action@alt
+          steps_context: ${{ toJSON( steps )}}
+          attempt_limit: 4
+          attempt_delay: 3000
       - name: command
         run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
+

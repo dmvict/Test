@@ -34,10 +34,11 @@ jobs:
         id: mmmm
         uses: dmvict/wretry.action@alt
         with:
-          retry_condition: steps._this.outputs.foo == 'foo'
+          retry_condition: contains( steps._this.outputs.foo, 'foo' )
           # action: dmvict/test.action@alt
           command: |
-            echo 'foo=foo' >> $GITHUB_OUTPUT
+            date=$(date)
+            echo 'foo=foo$date' >> $GITHUB_OUTPUT
             exit 1
           steps_context: ${{ toJSON( steps )}}
           attempt_limit: 4

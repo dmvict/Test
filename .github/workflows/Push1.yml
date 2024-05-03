@@ -38,7 +38,7 @@ jobs:
           # action: dmvict/test.action@alt
           command: |
             date=$(date)
-            echo 'foo=foo$date' >> $GITHUB_OUTPUT
+            echo "foo=foo$date" >> $GITHUB_OUTPUT
             exit 1
           steps_context: ${{ toJSON( steps )}}
           attempt_limit: 4

@@ -5,7 +5,7 @@ on : push
 
 jobs:
   success :
-    runs-on : ubuntu-latest
+    runs-on : windows-latest
     steps :
       # - uses: Wandalen/wretry.action@v3
       # - name: pre
@@ -34,12 +34,8 @@ jobs:
         id: mmmm
         uses: dmvict/wretry.action@alt
         with:
-          retry_condition: contains( steps._this.outputs.foo, 'foo' )
-          # action: dmvict/test.action@alt
-          command: |
-            date=$(date)
-            echo "foo=foo$date" >> $GITHUB_OUTPUT
-            exit 1
+          retry_condition: steps._this.outputs.string == 'foo'
+          action: dmvict/test.action@alt
           steps_context: ${{ toJSON( steps )}}
           attempt_limit: 4
           attempt_delay: 3000

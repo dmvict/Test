@@ -37,7 +37,7 @@ jobs:
           retry_condition: steps._this.outputs.foo == 'foo'
           # action: dmvict/test.action@alt
           command: |
-            echo 'foo=bar' >> $GITHUB_OUTPUT
+            echo 'foo=foo' >> $GITHUB_OUTPUT
             exit 1
           steps_context: ${{ toJSON( steps )}}
           attempt_limit: 4

@@ -15,7 +15,7 @@ jobs:
           action: dmvict/test.action@alt
           with: |
             multiline: |
-              ${{ join(secrets.MULTILINE, '\n')}}
+              ${{ toJSON(secrets.MULTILINE, '\n')}}
             singleline: single
             true_v: true
           attempt_limit: 4

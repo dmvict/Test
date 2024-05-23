@@ -7,40 +7,14 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      # - uses: Wandalen/wretry.action@v3
-      # - name: pre
-      #   uses: dmvict/wretry.action/pre@alt_conditions
-      #   with:
-      #     action: dmvict/test.action@docker_conditions
-      #     branch: js_action
-      #     with: |
-      #       string: -al
-      #       bool-like: /
-      #     attempt_limit: 4
-      #     attempt_delay: 3000
-
-      # - name: main
-      #   id: mmmm
-      #   uses: dmvict/wretry.action@alt
-      #   with:
-      #     action: dmvict/test.action@docker_conditions
-      #     steps_context: ${{ toJSON( steps )}}
-      #     with: |
-      #       string: -al
-      #       bool-like: /
-      #     attempt_limit: 4
-      #     attempt_delay: 3000
       - name: main
-        id: mmmm
-        uses: dmvict/wretry.action@alt
+        uses: Wandalen/wretry.action@master
         with:
-          retry_condition: contains( steps._this.outputs.foo, 'foo' )
-          # action: dmvict/test.action@alt
-          command: |
-            date=$(date)
-            echo "foo=foo$date" >> $GITHUB_OUTPUT
-            exit 0
-          steps_context: ${{ toJSON( steps )}}
+          action: dmvict/test.action@alt
+          with: |
+            multiline: ${{ secrets.MULTILINE }}
+            singleline: single
+            true_v: true
           attempt_limit: 4
           attempt_delay: 3000
       - name: command

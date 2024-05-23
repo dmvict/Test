@@ -8,18 +8,23 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       - name: main
+        env:
+          MULTILINE: |
+            foo
+            bar
+            baz
         uses: Wandalen/wretry.action@master
         with:
-          # command: |
-          #   echo -en "${{ join(secrets.MULTILINE, '\n')}}"
-          action: dmvict/test.action@alt
-          with: |
-            multiline: |
-              ${{ toJSON(secrets.MULTILINE)}}
-            singleline: single
-            true_v: true
-          attempt_limit: 4
-          attempt_delay: 3000
+          command: |
+            echo -en "${{ toJSON(env.MULTILINE)}}"
+          # action: dmvict/test.action@alt
+          # with: |
+          #   multiline: |
+          #     ${{ toJSON(secrets.MULTILINE)}}
+          #   singleline: single
+          #   true_v: true
+          # attempt_limit: 4
+          # attempt_delay: 3000
       # - name: command
       #   run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
 

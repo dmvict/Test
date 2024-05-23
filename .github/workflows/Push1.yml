@@ -11,8 +11,8 @@ jobs:
         env:
           MULTILINE: |
             foo
-            bar
-            baz
+            bar: baz
+            baz: { some }
         uses: Wandalen/wretry.action@master
         with:
           command: |

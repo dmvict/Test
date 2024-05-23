@@ -12,7 +12,7 @@ jobs:
         with:
           action: dmvict/test.action@alt
           with: |
-            multiline: ${{ secrets.MULTILINE }}
+            multiline: | ${{ secrets.MULTILINE }}
             singleline: single
             true_v: true
           attempt_limit: 4

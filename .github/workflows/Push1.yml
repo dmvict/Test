@@ -10,14 +10,16 @@ jobs:
       - name: main
         uses: Wandalen/wretry.action@master
         with:
-          action: dmvict/test.action@alt
-          with: |
-            multiline: |
-              ${{ secrets.MULTILINE }}
-            singleline: single
-            true_v: true
-          attempt_limit: 4
-          attempt_delay: 3000
-      - name: command
-        run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
+          command: |
+            echo -en "${{ join(secrets.MULTILINE, '\n')}}"
+          # action: dmvict/test.action@alt
+          # with: |
+          #   multiline: |
+          #     ${{ secrets.MULTILINE }}
+          #   singleline: single
+          #   true_v: true
+          # attempt_limit: 4
+          # attempt_delay: 3000
+      # - name: command
+      #   run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
 

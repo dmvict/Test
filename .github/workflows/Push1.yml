@@ -13,6 +13,6 @@ jobs:
           action: dmvict/test.action@post_without_default_input
           with: |
             value: 0
-            post_value: 1
+            post_value: 0
           attempt_limit: 4
           attempt_delay: 10000

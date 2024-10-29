@@ -8,11 +8,11 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       - name: test
-        uses: dmvict/wretry.action@exp
+        uses: Wandalen/wretry.action@v3.6.0
         with:
-          action: dmvict/test.action@post_without_default_input
+          action: docker/login-action@v3
           with: |
-            value: 0
-            post_value: 1
-          attempt_limit: 4
+            username: ${{ secrets.DOCKER_NAME }}
+            password: ${{ secrets.DOCKER_TOKEN }}
+          attempt_limit: 3
           attempt_delay: 10000

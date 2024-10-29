@@ -7,24 +7,11 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - name: main
-        env:
-          MULTILINE: |
-            foo
-            bar: baz
-            baz: { some }
-        uses: Wandalen/wretry.action@master
+      - name: test
+        uses: Wandalen/wretry.action@v3.5.0
         with:
-          command: |
-            echo -en "${{ toJSON(env.MULTILINE)}}"
-          # action: dmvict/test.action@alt
-          # with: |
-          #   multiline: |
-          #     ${{ toJSON(secrets.MULTILINE)}}
-          #   singleline: single
-          #   true_v: true
-          # attempt_limit: 4
-          # attempt_delay: 3000
-      # - name: command
-      #   run: echo -en "${{ toJSON( steps.mmmm.outputs ) }}"
-
+          action: dmvict/test.action@post_without_default_input
+          with: |
+            value: 0
+          attempt_limit: 4
+          attempt_delay: 10000

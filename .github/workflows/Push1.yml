@@ -1,7 +1,16 @@
 
 name : push1
 
-on : push
+# on : push
+on :
+  workflow_dispatch :
+    inputs :
+      value :
+        description : 'repo'
+        required : true
+      post_value :
+        description : 'repo'
+        required : true
 
 jobs:
   success :
@@ -12,7 +21,7 @@ jobs:
         with:
           action: dmvict/test.action@post_without_default_input
           with: |
-            value: 0
-            post_value: 0
+            value: ${{ inputs.value }}
+            post_value: ${{ inputs.post_value }}
           attempt_limit: 4
           attempt_delay: 10000

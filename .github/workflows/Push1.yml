@@ -8,7 +8,7 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       - name: test
-        uses: Wandalen/wretry.action@v3.5.0
+        uses: dmvict/wretry.action@exp
         with:
           action: dmvict/test.action@post_without_default_input
           with: |

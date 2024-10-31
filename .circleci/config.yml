@@ -12,5 +12,5 @@ workflows:
           base-revision: master
           config-path: .circleci/webgl-config.yml
           mapping: |
-            src/.* project-one true
-            out/.* project-two true
+            src/* project-one true
+            out/* project-two true

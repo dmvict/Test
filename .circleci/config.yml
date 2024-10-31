@@ -1,0 +1,16 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  path-filtering: circleci/path-filtering@1.1.0
+
+workflows:
+  setup-workflow:
+    jobs:
+      - path-filtering/filter:
+          base-revision: master
+          config-path: .circleci/webgl-config.yml
+          mapping: |
+            src/.* project-one true
+            out/.* project-two true

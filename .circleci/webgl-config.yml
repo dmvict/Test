@@ -1,0 +1,44 @@
+version: 2.1
+
+executors:
+  base:
+    docker:
+      - image: cimg/base:stable
+
+parameters:
+  project-one:
+    type: boolean
+    default: false
+  project-two:
+    type: boolean
+    default: false
+
+jobs:
+  project_one:
+      executor: base
+      steps:
+        - run:
+            command: |
+              echo "project one"
+
+  project_two:
+      executor: base
+      steps:
+        - run:
+            command: |
+              echo "project two"
+
+workflows:
+  build-1:
+    when:
+      or:
+        - << pipeline.parameters.project-one >>
+    jobs:
+      - project_one
+
+  build-2:
+    when:
+      or:
+        - << pipeline.parameters.project-two >>
+    jobs:
+      - project_two

@@ -9,6 +9,6 @@ jobs:
     steps :
       - uses: 'dmvict/wretry.action@exp'
         with:
-          action: dmvict/test.action@local_action
+          action: ./github/actions
           attempt_limit: 4
           attempt_delay: 1000

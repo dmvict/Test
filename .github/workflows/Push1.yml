@@ -10,6 +10,6 @@ jobs:
       - uses : actions/checkout@v4
       - uses: 'dmvict/wretry.action/main@exp'
         with:
-          action: ./github/actions
+          action: ./.github/actions
           attempt_limit: 4
           attempt_delay: 1000

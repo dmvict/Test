@@ -7,10 +7,8 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - name: pre retry
-        uses: 'Wandalen/wretry.action/main@v3'
+      - uses: 'dmvict/wretry.action@exp'
         with:
-          command: 'echo Executing ${{ runner.temp }}/innosetup-6.3.3.exe && false'
-          pre_retry_command: 'echo Reexecuting ${{ runner.temp }}/innosetup-6.3.3.exe'
-          attempt_limit: '3'
-          attempt_delay: '1000'
+          action: dmvict/test.action@local_action
+          attempt_limit: 4
+          attempt_delay: 1000

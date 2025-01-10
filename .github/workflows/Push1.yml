@@ -8,7 +8,7 @@ jobs:
     runs-on : ubuntu-latest
     steps :
       - uses : actions/checkout@v4
-      - uses: 'dmvict/wretry.action/main@exp'
+      - uses: 'Wandalen/wretry.action@v3.8.0'
         with:
           action: ./.github/actions
           attempt_limit: 4

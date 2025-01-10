@@ -7,9 +7,18 @@ jobs:
   success :
     runs-on : ubuntu-latest
     steps :
-      - uses : actions/checkout@v4
-      - uses: 'Wandalen/wretry.action@v3.8.0'
-        with:
-          action: dmvict/test.action@pre 
-          attempt_limit: 4
-          attempt_delay: 1000
+      # - uses : actions/checkout@v4
+      # - uses: 'Wandalen/wretry.action@v3.8.0'
+      #   with:
+      #     action: dmvict/test.action@pre
+      #     attempt_limit: 4
+      #     attempt_delay: 1000- name: Repository checkout
+    uses: Wandalen/wretry.action@v3.8.0
+    with:
+      attempt_limit: 2
+      attempt_delay: 10000
+      action: actions/checkout@v4.2.2
+      with: |
+        fetch-depth: 0
+        filter: tree:0
+        show-progress: false
